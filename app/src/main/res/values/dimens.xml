@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mg_4">32dp</dimen>
+    <dimen name="mg_3">24dp</dimen>
+    <dimen name="mg_2">16dp</dimen>
+    <dimen name="mg_1">8dp</dimen>
+
+    <dimen name="pd_4">32dp</dimen>
+    <dimen name="pd_3">24dp</dimen>
+    <dimen name="pd_2">16dp</dimen>
+    <dimen name="pd_1">8dp</dimen>
+
+    <dimen name="radius">32dp</dimen>
+    <dimen name="appbar_height"></dimen>
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_stroke">2dp</dimen>
+</resources>

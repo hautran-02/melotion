@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimary">@color/pri_red</item>
+        <item name="colorPrimaryDark">@color/pri_black</item>
+        <item name="colorAccent">@color/pri_yellow</item>
+    </style>
+    <style name="h1">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">28dp</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/bold</item>
+    </style>
+    <style name="h2">
+        <item name="android:textColor">@color/pri_red</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:gravity">center</item>
+    </style> 4
+    <style name="h3">
+        <item name="android:textColor">@color/pri_red</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="edt">
+        <item name="android:color">@color/pri_bright_brown</item>
+    </style>
+
+    <style name="button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_layout</item>
+        <item name="android:textColor">@color/pri_yellow</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="primaryBtn">
+        <item name="android:backgroundTint">@drawable/btn_bg</item>
+        <item name="elevation">4dp</item>
+        <item name="android:textColor">@color/pri_yellow</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="menu">
+        <item name="android:background">@color/pri_bright_brown</item>
+    </style>
+
+    <style name="ed_primary">
+        <item name="background">@drawable/ed_layout</item>
+        <item name="backgroundColor">@color/transparent</item>
+        <item name="height">64dp</item>
+    </style>
+
+<!-- Ẩn tiêu đề -->
+    <style name="AppTheme.NoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+<!--    Editext: dark background    -->
+    <style name="ed_appbar">
+        <item name="background">@drawable/ed_dark_bg_layout</item>
+        <item name="hintTextColor">@color/dark_bg_text</item>
+        <item name="android:textColor">@color/dark_bg_text</item>
+        <item name="android:padding">@dimen/pd_1</item>
+    </style>
+</resources>
