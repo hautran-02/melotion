@@ -6,13 +6,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.musicplayer.api.UserApi;
+import com.example.musicplayer.domain.User;
+import com.example.musicplayer.domain.UserMessage;
+import com.example.musicplayer.retrofit.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tvToRegister;
     Button btnLogin;
     EditText edPhone, edPassword;
+
+    UserApi userApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +50,40 @@ public class LoginActivity extends AppCompatActivity {
                 String phone = edPhone.getText().toString().trim();
                 String password = edPassword.getText().toString().trim();
 
-                System.out.println(phone);
-                System.out.println(password);
+                if(!phone.isEmpty() && !password.isEmpty())
+                {
+                    userApi= RetrofitClient.getInstance().getRetrofit().create(UserApi.class);
+                    userApi.login(phone, password).enqueue(new Callback<UserMessage>() {
+                        @Override
+                        public void onResponse(Call<UserMessage> call, Response<UserMessage> response) {
+                            UserMessage userLogin = response.body();
+                            if (userLogin.getUser()!= null) {
+                                // Xử lý kết quả trả về nếu thành công
+                                Toast.makeText(LoginActivity.this, userLogin.getMessage(), Toast.LENGTH_SHORT).show();
+                                User user = new User(
+                                        userLogin.getUser().getId(),
+                                        userLogin.getUser().getPhone(),
+                                        userLogin.getUser().getFirst_name(),
+                                        userLogin.getUser().getFirst_name(),
+                                        userLogin.getUser().getEmail()
+                                );
+                                SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                // Xử lý lỗi nếu kết quả trả về không thành công
+                                Toast.makeText(LoginActivity.this, userLogin.getMessage(), Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//                                startActivity(intent);
+                            }
+                        }
 
-                if(phone.equals("1") && password.equals("1")){
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                        @Override
+                        public void onFailure(Call<UserMessage> call, Throwable t) {
+                            // Xử lý lỗi nếu có lỗi xảy ra trong quá trình gọi API
+                            System.out.println(t);
+                        }
+                    });
                 }
             }
         });
