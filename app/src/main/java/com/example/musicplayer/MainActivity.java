@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.musicplayer.domain.User;
 import com.example.musicplayer.fragment.HomeFragment;
 import com.example.musicplayer.fragment.SearchFragment;
 import com.example.musicplayer.fragment.SettingFragment;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+//        System.out.println("------------------");
+//        System.out.println(user.getPhone());
 
 //        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 //        startActivity(intent);
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.navigation_home:
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.container, new SongListFragment())
+                                        .replace(R.id.container, new HomeFragment())
                                         .commit();
                                 return true;
                             case R.id.navigation_search:

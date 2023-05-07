@@ -32,7 +32,7 @@
     </style>
 
     <style name="primaryBtn">
-        <item name="android:backgroundTint">@drawable/btn_bg</item>
+        <item name="android:backgroundTint">@drawable/btn_layout</item>
         <item name="elevation">4dp</item>
         <item name="android:textColor">@color/pri_yellow</item>
         <item name="android:textSize">16dp</item>
