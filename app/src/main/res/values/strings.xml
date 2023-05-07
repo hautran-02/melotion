@@ -9,6 +9,10 @@
     <string name="topbar_player">Tên bài hát</string>
     <string name="disc">Đĩa nhạc</string>
     <string name="player_btn">Player Button</string>
-    <string name="song">Bài hát</string>
-    <string name="category">Danh mục</string>
+    <string name="song_manager">Bài hát</string>
+    <string name="category_manager">Danh mục</string>
+    <string name="user_manager">Người dùng</string>
+    <string name="extended_fab_content_desc">Nút nổi</string>
+    <string name="extended_fab_label">Thêm</string>
+
 </resources>

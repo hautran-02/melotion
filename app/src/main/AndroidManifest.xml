@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme.NoTitleBar"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".AdminActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,10 +30,7 @@
         <activity android:name=".LoginActivity"></activity>
 <!--        <activity android:name=".LoginActivity"></activity>-->
         <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".HomeActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".PlayingActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
-
     </application>
 </manifest>

@@ -5,10 +5,15 @@
     <item
         android:id="@+id/navigation_song"
         android:icon="@drawable/ic_song"
-        android:title="@string/song" />
+        android:title="@string/song_manager" />
 
     <item
         android:id="@+id/navigation_category"
         android:icon="@drawable/ic_category"
-        android:title="@string/category" />
+        android:title="@string/category_manager" />
+
+    <item
+        android:id="@+id/navigation_user_maneger"
+        android:icon="@drawable/ic_user_maneger"
+        android:title="@string/user_manager" />
 </menu>
