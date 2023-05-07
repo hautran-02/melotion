@@ -14,4 +14,6 @@
     <dimen name="appbar_height"></dimen>
     <dimen name="btn_height">48dp</dimen>
     <dimen name="btn_stroke">2dp</dimen>
+    <dimen name="btn_player">64dp</dimen>
+
 </resources>
