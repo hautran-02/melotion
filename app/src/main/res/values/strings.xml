@@ -8,4 +8,7 @@
     <string name="topbar_searching_title"></string>
     <string name="topbar_player">Tên bài hát</string>
     <string name="disc">Đĩa nhạc</string>
+    <string name="player_btn">Player Button</string>
+    <string name="song">Bài hát</string>
+    <string name="category">Danh mục</string>
 </resources>

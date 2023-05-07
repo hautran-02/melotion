@@ -22,7 +22,7 @@
         app:itemIconTint="@color/bottom_nar_color"
         app:itemTextColor="@color/bg_item_seleted"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_menu" >
+        app:menu="@menu/bottom_navigaton_menu_admin" >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 

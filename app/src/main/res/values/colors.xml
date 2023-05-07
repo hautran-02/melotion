@@ -20,7 +20,8 @@
     <color name="bg_layout">#e4ddd2</color>
     <color name="stroke">#484a48</color>
     <color name="appbar_text">#355080</color>
+    <color name="bg_item_seleted">#667EAA</color>
 
-<!--    Color follow bg     -->
+    <!--    Color follow bg     -->
     <color name="dark_bg_text">#FFFFFFFF</color>
 </resources>
