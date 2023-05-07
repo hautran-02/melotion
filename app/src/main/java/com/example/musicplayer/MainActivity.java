@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.navigation_home:
                                 getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.container, new SongListFragment())
+                                        .replace(R.id.container, new HomeFragment())
                                         .commit();
                                 return true;
                             case R.id.navigation_search:
