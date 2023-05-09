@@ -12,7 +12,16 @@
     <string name="song_manager">Bài hát</string>
     <string name="category_manager">Danh mục</string>
     <string name="user_manager">Người dùng</string>
-    <string name="extended_fab_content_desc">Nút nổi</string>
+    <string name="float_button">Nút nổi</string>
     <string name="extended_fab_label">Thêm</string>
+    <string name="song_list">Danh sách bài hát</string>
+    <string name="add_song">Thêm một bài hát</string>
+    <string name="song_name">Tên bài hát</string>
+    <string name="song_signer">Tên ca sĩ</string>
+    <string name="song_author">Người sáng tác</string>
+    <string name="song_link">Chưa có bài hát</string>
+    <string name="song_img">Chọn avatar</string>
+    <string name="upload">Tải lên</string>
+    <string name="add">Thêm vào</string>
 
 </resources>
