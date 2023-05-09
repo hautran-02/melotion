@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.musicplayer.AddSongActivity;
 import com.example.musicplayer.R;
 
 public class SongManagerFragment extends Fragment {
@@ -31,7 +33,8 @@ public class SongManagerFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), AddSongActivity.class);
+                startActivity(intent);
             }
         });
     }

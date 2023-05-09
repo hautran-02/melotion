@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,7 @@ import java.io.IOException;
 
 public class AddSongActivity extends AppCompatActivity {
     Button btnChooseSong, btnChooseImg, btnAdd;
+    TextView tvCancel;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PICK_MP3_REQUEST = 2;
     private Uri mImageUri, mSongUri;
@@ -52,12 +54,20 @@ public class AddSongActivity extends AppCompatActivity {
                 add();
             }
         });
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void init(){
         btnChooseImg = findViewById(R.id.btnChooseImage);
         btnChooseSong = findViewById(R.id.btnChooseLink);
         btnAdd = findViewById(R.id.btnAddSong);
+        tvCancel = findViewById(R.id.tvCancel);
     }
 
     //Upload Image
