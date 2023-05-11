@@ -10,16 +10,22 @@
         <item name="android:textSize">28dp</item>
         <item name="android:gravity">center</item>
         <item name="fontFamily">@font/bold</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
     </style>
     <style name="h2">
-        <item name="android:textColor">@color/pri_red</item>
+        <item name="android:textColor">@color/primary</item>
         <item name="android:textSize">24dp</item>
         <item name="android:gravity">center</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
     </style> 4
     <style name="h3">
         <item name="android:textColor">@color/pri_red</item>
         <item name="android:textSize">20dp</item>
         <item name="android:gravity">center</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
     </style>
     <style name="edt">
         <item name="android:color">@color/pri_bright_brown</item>
