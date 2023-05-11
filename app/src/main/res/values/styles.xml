@@ -34,6 +34,18 @@
         <item name="android:ellipsize">end</item>
         <item name="android:singleLine">true</item>
     </style>
+    <style name="table">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center|fill_vertical</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
     <style name="edt">
         <item name="android:color">@color/pri_bright_brown</item>
     </style>
@@ -56,8 +68,13 @@
     </style>
 
     <style name="ed_primary">
-        <item name="background">@drawable/ed_layout</item>
-        <item name="backgroundColor">@color/transparent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@drawable/ed_layout</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_marginTop">16dp</item>
         <item name="height">64dp</item>
     </style>
 
@@ -73,5 +90,9 @@
         <item name="hintTextColor">@color/dark_bg_text</item>
         <item name="android:textColor">@color/dark_bg_text</item>
         <item name="android:padding">@dimen/pd_1</item>
+    </style>
+
+    <style name="btn_bottom">
+
     </style>
 </resources>

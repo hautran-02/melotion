@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.MainActivity;
+import com.example.musicplayer.PlayerActivity;
 import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapter.SongAdapter;
@@ -51,7 +52,6 @@ public class SongListFragment extends Fragment {
         // Initialize the RecyclerView
         mRecyclerView = rootView.findViewById(R.id.rcvSongList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         // Create a list of songs
         List<Song> songList = new ArrayList<>();
         songList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
@@ -59,6 +59,7 @@ public class SongListFragment extends Fragment {
         songList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
         songList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
         songList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
+
 
         // Create and set the adapter for the RecyclerView
         mSongAdapter = new SongListAdapter(songList);
@@ -87,7 +88,7 @@ public class SongListFragment extends Fragment {
 
 //                If layout_playing is activity
 
-                Intent intent = new Intent(getActivity(), PlayingActivity.class);
+                Intent intent = new Intent(getActivity(), PlayerActivity.class);
                 intent.putExtra("data", data.getId());
                 startActivity(intent);
             }

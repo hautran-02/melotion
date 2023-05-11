@@ -24,5 +24,19 @@
     <string name="upload">Tải lên</string>
     <string name="add">Thêm vào</string>
     <string name="cancel">Hủy bỏ</string>
+    <string name="delete">Xóa</string>
+    <string name="edit">Chỉnh sửa</string>
+    <string name="action">Hành động</string>
+    <string name="edit_song">Chỉnh sửa bài hát</string>
+    <string name="user_list">Danh sách người dùng</string>
+    <string name="number">STT</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="edit_user">Chỉnh sửa người dùng</string>
+    <string name="first_name">Tên</string>
+    <string name="last_name">Họ</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+
 
 </resources>

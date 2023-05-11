@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/bg_layout">
 
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -24,6 +24,5 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigaton_menu_admin" >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
