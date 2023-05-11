@@ -19,18 +19,30 @@ import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.adapter.SongListAdapter;
+import com.example.musicplayer.api.CategoryApi;
+import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.domain.Category;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
+import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.retrofit.RetrofitClient;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SongListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private SongListAdapter mSongAdapter;
 
-    private  int categoryId;
+    private SongApi songApi;
+
+    private  Long categoryId;
 
     public SongListFragment() {
         // Required empty public constructor
@@ -40,66 +52,25 @@ public class SongListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_song_list, container, false);
+        View View = inflater.inflate(R.layout.fragment_song_list, container, false);
 
 //        Get categoryId
         Bundle bundle = getArguments();
         if(bundle != null){
-            categoryId = bundle.getInt("category");
+            categoryId = bundle.getLong("category");
         }
         System.out.println(categoryId);
 
         // Initialize the RecyclerView
-        mRecyclerView = rootView.findViewById(R.id.rcvSongList);
+        mRecyclerView = View.findViewById(R.id.rcvSongList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        // Create a list of songs
-        List<Song> songList = new ArrayList<>();
-        songList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
-        songList.add(new Song("Song Title 2", "Song Artist 2", R.drawable.default_song));
-        songList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
-        songList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
-        songList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
-
-
-        // Create and set the adapter for the RecyclerView
-        mSongAdapter = new SongListAdapter(songList);
-        mRecyclerView.setAdapter(mSongAdapter);
-
-        mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Song data = songList.get(position);
-
-/*                *//*If layout_playing is fragment*//*
-
-                // Start a new fragment transaction
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-                // Replace the current fragment with a new fragment
-                Fragment newFragment = new SongListFragment();
-                Bundle args = new Bundle();
-                args.putSerializable("data", data.getId());
-                newFragment.setArguments(args);
-
-                transaction.replace(R.id.container, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();*/
-
-//                If layout_playing is activity
-
-                Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                intent.putExtra("data", data.getId());
-                startActivity(intent);
-            }
-        });
-        return rootView;
+        GetSong();
+        return View;
     }
 
     // SongFragment.java
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Get the arguments passed from the CategoryFragment
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -107,5 +78,42 @@ public class SongListFragment extends Fragment {
             // Use the itemId to get the data you want
             // ...
         }
+    }
+
+    private void GetSong(){
+        songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+
+        songApi.SongCategory(categoryId).enqueue(new Callback<SongMessage>() {
+            @Override
+            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                List<Song> songs;
+                SongMessage songMessage = response.body();
+                songs = songMessage.getSongs();
+                List<Song> songList = songs;
+                mSongAdapter = new SongListAdapter(songs);
+                mRecyclerView.setAdapter(mSongAdapter);
+                mRecyclerView.setHasFixedSize(true);
+                mSongAdapter.notifyDataSetChanged();
+                if(songs!=null && !songs.isEmpty()) {
+                    mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Song data = songs.get(position);
+                            Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                            intent.putExtra("position",position);
+                            intent.putExtra("songs", (Serializable) songs);
+                            System.out.println("-----------------");
+                            System.out.println(data);
+                            //intent.putExtra("songList", new ArrayList<>(songList));
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<SongMessage> call, Throwable t) {
+                System.out.println(t);
+            }
+        });
     }
 }
