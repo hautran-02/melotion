@@ -45,26 +45,37 @@
                     style="@style/h1"
                     android:layout_width="154dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="12dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:ellipsize="marquee"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
                     android:text="@string/topbar_player"
                     android:textAlignment="center"
-                    android:layout_gravity="center_horizontal"
                     app:layout_constraintStart_toEndOf="@+id/imageButton"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
 
-            <ImageView
+
+            <!--color = #552C2C-->
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgDisc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/mg_4"
-                android:src="@drawable/music_disc"
-                android:contentDescription="@string/disc"/>
+                android:layout_height="310dp"
+                android:layout_marginTop="90dp"
+                android:src="@drawable/rangkhon"
+                app:civ_border_color="#000000"
+                app:civ_border_width="50dp"
+                android:foreground="@drawable/circle_small"
+                android:foregroundGravity="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
