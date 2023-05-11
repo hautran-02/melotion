@@ -2,8 +2,6 @@ package com.example.musicplayer;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,11 +12,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-import java.io.IOException;
 
-public class AddSongActivity extends AppCompatActivity {
+public class EditSongActivity extends AppCompatActivity {
     Button btnChooseSong, btnChooseImg, btnSubmit;
     TextView tvCancel;
+    int currentPosition;
+    String data;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PICK_MP3_REQUEST = 2;
     private Uri mImageUri, mSongUri;
@@ -27,10 +26,9 @@ public class AddSongActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_song);
+        setContentView(R.layout.activity_edit_song);
 
         init();
-        setEvent();
     }
 
     private void setEvent() {
@@ -51,7 +49,7 @@ public class AddSongActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add();
+                submit();
             }
         });
 
@@ -63,11 +61,19 @@ public class AddSongActivity extends AppCompatActivity {
         });
     }
 
+    private void loadData(){
+        Intent intent = getIntent();
+        data = intent.getStringExtra("data");
+        System.out.println(data);
+    }
+
     private void init(){
         btnChooseImg = findViewById(R.id.btnChooseImage);
         btnChooseSong = findViewById(R.id.btnChooseLink);
         btnSubmit = findViewById(R.id.btnSubmit);
         tvCancel = findViewById(R.id.tvCancel);
+        setEvent();
+        loadData();
     }
 
     //Upload Image
@@ -116,7 +122,8 @@ public class AddSongActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_MP3_REQUEST);
     }
 
-    private void add(){
+    private void submit(){
 
     }
 }
+

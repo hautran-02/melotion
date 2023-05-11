@@ -1,6 +1,5 @@
 package com.example.musicplayer.adapter;
 
-import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,47 +9,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.musicplayer.R;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
 
 import java.util.List;
 
-public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongViewHolder> {
+public class SongManagerAdapter extends RecyclerView.Adapter<SongManagerAdapter.SongViewHolder> {
 
     private List<Song> mSongList;
     private OnItemClickListener mListener;
 
-    public SongListAdapter(List<Song> songList) {
+    public SongManagerAdapter(List<Song> songList) {
         mSongList = songList;
     }
 
     @Override
-    public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SongManagerAdapter.SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.song_item, parent, false);
-        return new SongViewHolder(view, mListener);
+                .inflate(R.layout.item_song_manager, parent, false);
+        return new SongManagerAdapter.SongViewHolder(view, mListener);
     }
 
     @Override
-    public void onBindViewHolder(SongViewHolder holder, int position) {
+    public void onBindViewHolder(SongManagerAdapter.SongViewHolder holder, int position) {
         Song song = mSongList.get(position);
 
         holder.mSongName.setText(song.getName());
-        holder.mArtistTextView.setText(song.getSinger());
-        //holder.mImageView.setImageResource(song.getImage());
-
-        Glide.with(holder.itemView.getContext())
-                .load(song.getImage())
-                .into(holder.mImageView);
+        holder.mArtistTextView.setText(song.getArtist());
+        holder.mImageView.setImageResource(song.getImage());
     }
 
     @Override
     public int getItemCount() {
-        if(mSongList!= null)
-            return mSongList.size();
-        return 0;
+        return mSongList.size();
     }
 
     public static class SongViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +55,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgSong);
             mSongName = itemView.findViewById(R.id.tvSongName);
-            mArtistTextView = itemView.findViewById(R.id.tvArtist);
+            mArtistTextView = itemView.findViewById(R.id.tvSinger);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

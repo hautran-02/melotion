@@ -47,7 +47,7 @@
                 tools:layout_editor_absoluteY="0dp" />
 
             <ImageButton
-                android:id="@+id/btnAddSong"
+                android:id="@+id/btnForwardAddSong"
                 android:layout_width="49dp"
                 android:layout_height="56dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -73,13 +73,13 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
-            <ListView
-                android:id="@+id/lvSongManager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvSongListManager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 </LinearLayout>
