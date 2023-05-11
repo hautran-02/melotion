@@ -61,6 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             mLastName = itemView.findViewById(R.id.tvLastName);
             mPhone = itemView.findViewById(R.id.tvPhone);
             mEmail = itemView.findViewById(R.id.tvEmail);
+            mPassword = itemView.findViewById(R.id.tvPassword);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

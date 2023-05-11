@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true" >
@@ -6,6 +7,10 @@
             <solid android:color="@color/light_primary"/>
             <size android:height="40dp" android:width="100dp"/>
             <corners android:radius="40dp" />
+            <stroke
+                android:color="@color/primary"
+                android:width="@dimen/btn_stroke"
+                />
         </shape>
     </item>
 
@@ -14,6 +19,10 @@
             <solid android:color="@color/light_primary"/>
             <size android:height="40dp" android:width="100dp"/>
             <corners android:radius="40dp" />
+            <stroke
+                android:color="@color/primary"
+                android:width="@dimen/btn_stroke"
+                />
         </shape>
     </item>
 
@@ -21,7 +30,11 @@
         <shape android:shape="rectangle">
             <size android:height="30dp" android:width="100dp"/>
             <corners android:radius="40dp" />
-            <solid android:color="@color/primary"/>
+            <solid android:color="@color/transparent"/>
+            <stroke
+                android:color="@color/primary"
+                android:width="@dimen/btn_stroke"
+                />
         </shape>
     </item>
 </selector>
