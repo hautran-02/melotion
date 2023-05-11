@@ -31,6 +31,7 @@
         android:textAlignment="center"
         android:textColor="@color/pri_red"
         android:textSize="34sp"
+        style="@style/h1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
