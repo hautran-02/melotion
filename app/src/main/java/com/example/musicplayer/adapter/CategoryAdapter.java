@@ -82,7 +82,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+        public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.musicplayer.R;
 import com.example.musicplayer.domain.Song;
 
@@ -38,13 +39,16 @@ public class SongAdapter extends ArrayAdapter<Song> {
         Song song = getItem(position);
 
         ImageView albumArt = view.findViewById(R.id.imgSong);
-        albumArt.setImageResource(song.getImage());
+        Glide.with(convertView.getContext())
+                .load(song.getImage())
+                .into(albumArt);
+
 
         TextView songTitle = view.findViewById(R.id.tvSongName);
         songTitle.setText(song.getName());
 
         TextView artistName = view.findViewById(R.id.tvArtist);
-        artistName.setText(song.getArtist());
+        artistName.setText(song.getSinger());
 
         return view;
     }
