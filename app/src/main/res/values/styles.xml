@@ -54,6 +54,27 @@
         <item name="android:background">@drawable/btn_layout</item>
         <item name="android:textColor">@color/pri_yellow</item>
         <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="button_black" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_black_layout</item>
+        <item name="android:textColor">@color/pri_yellow</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="button_outline" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_outline_layout</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="primaryBtn">
@@ -95,4 +116,5 @@
     <style name="btn_bottom">
 
     </style>
+
 </resources>

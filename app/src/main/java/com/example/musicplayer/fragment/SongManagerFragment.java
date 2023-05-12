@@ -69,11 +69,11 @@ public class SongManagerFragment extends Fragment {
 
         // Create a list of songs
         songList = new ArrayList<>();
-        songList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
-        songList.add(new Song("Song Title 2", "Song Artist 2", R.drawable.default_song));
-        songList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
-        songList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
-        songList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
+//        songList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
+//        songList.add(new Song("Song Title 2", "Song Artist 2", R.drawable.default_song));
+//        songList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
+//        songList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
+//        songList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
 
         // Create and set the adapter for the RecyclerView
         mSongAdapter = new SongManagerAdapter(songList);

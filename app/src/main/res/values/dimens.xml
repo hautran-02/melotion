@@ -10,9 +10,12 @@
     <dimen name="pd_2">16dp</dimen>
     <dimen name="pd_1">8dp</dimen>
 
+    <dimen name="radius_mini">16dp</dimen>
+    <dimen name="stroke">0.8dp</dimen>
+
     <dimen name="radius">32dp</dimen>
     <dimen name="appbar_height"></dimen>
-    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_height">56dp</dimen>
     <dimen name="btn_stroke">2dp</dimen>
     <dimen name="btn_player">64dp</dimen>
     <dimen name="ed_width">320dp</dimen>
