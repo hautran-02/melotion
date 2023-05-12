@@ -53,13 +53,6 @@ public class SongManagerFragment extends Fragment {
     }
 
     private void setEvent() {
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddSongActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void loadData(){
@@ -94,8 +87,6 @@ public class SongManagerFragment extends Fragment {
     }
 
     private void init() {
-        btnAdd = view.findViewById(R.id.btnForwardAddSong);
-        System.out.println(btnAdd);
         setEvent();
         loadData();
     }

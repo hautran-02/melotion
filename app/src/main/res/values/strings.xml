@@ -5,7 +5,6 @@
     <string name="float_layout">Đang phát</string>
     <string name="back">Trở về</string>
     <string name="page_title">Music Player</string>
-    <string name="topbar_searching_title"></string>
     <string name="topbar_player">Tên bài hát</string>
     <string name="disc">Đĩa nhạc</string>
     <string name="player_btn">Player Button</string>
@@ -37,6 +36,7 @@
     <string name="last_name">Họ</string>
     <string name="email">Email</string>
     <string name="password">Mật khẩu</string>
-
+    <string name="category_list">Danh sách danh mục</string>
+    <string name="list">Danh sách</string>
 
 </resources>

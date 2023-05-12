@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvToRegister;
     Button btnLogin;
     EditText edPhone, edPassword;
-
     UserApi userApi;
 
     @Override
