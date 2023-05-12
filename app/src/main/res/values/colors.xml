@@ -15,10 +15,14 @@
     <color name="btn_bg">#e65e56</color>
     <color name="transparent">#00FF0000</color>
     <color name="primary">#355080</color>
+    <color name="light_primary">#667EAA</color>
+    <color name="btn_black">#383938</color>
+    <color name="btn_black_pressed">#676867</color>
 
     <!-- Color for properties -->
     <color name="bg_layout">#e4ddd2</color>
-    <color name="stroke">#484a48</color>
+    <color name="stroke">#808080</color>
+    <color name="pressed">#484a48</color>
     <color name="appbar_text">#355080</color>
     <color name="bg_item_seleted">#667EAA</color>
 

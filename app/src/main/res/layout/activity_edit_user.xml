@@ -18,23 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingTop="@dimen/pd_4"
             android:paddingLeft="@dimen/pd_4"
             android:paddingRight="@dimen/pd_4">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
-
-                <TextView
-                    android:id="@+id/tvCancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    style="@style/h4"
-                    android:text="@string/cancel"/>
-
-            </LinearLayout>
             <TextView
                 android:id="@+id/editUser"
                 style="@style/h1"
@@ -53,6 +40,7 @@
                 android:paddingLeft="@dimen/pd_2"
                 android:paddingRight="@dimen/pd_2"
                 android:layout_marginTop="@dimen/mg_2"
+                android:paddingBottom="16dp"
                 android:orientation="vertical">
 
                 <EditText
@@ -66,7 +54,7 @@
 
 
                 <EditText
-                    android:id="@+id/ed_lastname"
+                    android:id="@+id/edLastname"
                     style="@style/ed_primary"
                     android:hint="@string/last_name"
                     android:inputType="text"
@@ -97,17 +85,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSubmit"
-                    style="@style/button"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/primary"
-                    android:text="@string/edit"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/mg_2"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnEditUserCancel"
+                        style="@style/button_black"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="2dp"
+                        android:text="@string/cancel" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnEditUserSubmit"
+                        style="@style/button"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="2dp"
+                        android:text="@string/edit" />
+                </LinearLayout>
             </LinearLayout>
 
 

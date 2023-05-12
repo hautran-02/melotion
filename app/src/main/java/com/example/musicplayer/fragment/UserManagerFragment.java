@@ -23,19 +23,21 @@ import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.EditUserActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapter.SongManagerAdapter;
+import com.example.musicplayer.adapter.UserAdapter;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
+import com.example.musicplayer.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagerFragment extends Fragment  {
     ImageButton btnAdd;
-    List<Song> userList;
+    List<User> userList;
     View view;
     int currentPosition;
     private RecyclerView mRecyclerView;
-    private SongManagerAdapter mSongAdapter;
+    private UserAdapter mUserAdapter;
     public UserManagerFragment() {
         // Required empty public constructor
     }
@@ -66,25 +68,24 @@ public class UserManagerFragment extends Fragment  {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Create a list of songs
-        userList = new ArrayList<>();
-        userList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
-        userList.add(new Song("Song Title 2", "Song Artist 2", R.drawable.default_song));
-        userList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
-        userList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
-        userList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
+        userList = new ArrayList<User>();
+        userList.add(new User(1, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
+        userList.add(new User(2, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
+        userList.add(new User(3, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
 
         // Create and set the adapter for the RecyclerView
-        mSongAdapter = new SongManagerAdapter(userList);
-        mRecyclerView.setAdapter(mSongAdapter);
+        mUserAdapter = new UserAdapter(userList);
+        mRecyclerView.setAdapter(mUserAdapter);
 
-        mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mUserAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Song data = userList.get(position);
-
-                Intent intent = new Intent(getActivity(), EditUserActivity.class);
-                intent.putExtra("data", data.getId());
-                startActivity(intent);
+//                User data = userList.get(position);
+//
+//                Intent intent = new Intent(getActivity(), EditUserActivity.class);
+//                intent.putExtra("data", data.getId());
+//                startActivity(intent);
+                showDialog();
             }
         });
     }
@@ -113,9 +114,9 @@ public class UserManagerFragment extends Fragment  {
         editLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Song data = userList.get(currentPosition);
-                Intent intent = new Intent(getActivity(), EditSongActivity.class);
-                intent.putExtra("data", "1");
+                User data = userList.get(currentPosition);
+                Intent intent = new Intent(getActivity(), EditUserActivity.class);
+                intent.putExtra("data", data);
                 Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
 
                 startActivity(intent);

@@ -3,24 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:background="@drawable/bg_primary">
+    android:paddingLeft="4dp"
+    android:paddingRight="8dp"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/layout_user"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_height"
         android:orientation="horizontal"
-        android:background="@drawable/bg_primary">
-
-        <TextView
-            android:id="@+id/tvNumber"
-            style="@style/table"
-            android:layout_weight="0.16"
-            android:text="@string/number"/>
+        android:background="@drawable/bg_color">
 
         <TextView
             android:id="@+id/tvFirstName"
@@ -45,6 +37,12 @@
             style="@style/table"
             android:layout_weight="0.21"
             android:text="@string/phone"/>
+
+        <TextView
+            android:id="@+id/tvPassword"
+            style="@style/table"
+            android:layout_weight="0"
+            android:text="@string/password"/>
 
     </LinearLayout>
 

@@ -2,9 +2,10 @@ package com.example.musicplayer.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     @SerializedName("id")
     private long id;
@@ -102,7 +103,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getRole() {
         return role;
     }
@@ -110,4 +110,5 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
 }
