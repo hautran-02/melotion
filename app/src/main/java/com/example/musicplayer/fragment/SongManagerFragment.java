@@ -25,11 +25,18 @@ import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapter.SongListAdapter;
 import com.example.musicplayer.adapter.SongManagerAdapter;
+import com.example.musicplayer.api.SongApi;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
+import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SongManagerFragment extends Fragment {
     ImageButton btnAdd;
@@ -38,6 +45,8 @@ public class SongManagerFragment extends Fragment {
     int currentPosition;
     private RecyclerView mRecyclerView;
     private SongManagerAdapter mSongAdapter;
+
+    SongApi songApi;
     public SongManagerFragment() {
         // Required empty public constructor
     }
@@ -69,26 +78,28 @@ public class SongManagerFragment extends Fragment {
 
         // Create a list of songs
         songList = new ArrayList<>();
-        songList.add(new Song("Song Title 1", "Song Artist 1", R.drawable.default_song));
-        songList.add(new Song("Song Title 2", "Song Artist 2", R.drawable.default_song));
-        songList.add(new Song("Song Title 3", "Song Artist 3", R.drawable.default_song));
-        songList.add(new Song("Song Title 4", "Song Artist 4", R.drawable.default_song));
-        songList.add(new Song("Song Title 5", "Song Artist 5", R.drawable.default_song));
-
-        // Create and set the adapter for the RecyclerView
-        mSongAdapter = new SongManagerAdapter(songList);
-        mRecyclerView.setAdapter(mSongAdapter);
-
-        mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+        songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+        songApi.getAllSong().enqueue(new Callback<SongMessage>() {
             @Override
-            public void onItemClick(int position) {
-//                Song data = songList.get(position);
-//
-//                Intent intent = new Intent(getActivity(), PlayingActivity.class);
-//                intent.putExtra("data", data.getId());
-//                startActivity(intent);
-                currentPosition = position;
-                showDialog();
+            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                songList = response.body().getSongs();
+
+                // Create and set the adapter for the RecyclerView
+                mSongAdapter = new SongManagerAdapter(songList);
+                mRecyclerView.setAdapter(mSongAdapter);
+                mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        currentPosition = position;
+                        Song song  = songList.get(currentPosition);
+                        showDialog(song);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<SongMessage> call, Throwable t) {
+
             }
         });
     }
@@ -100,7 +111,8 @@ public class SongManagerFragment extends Fragment {
         loadData();
     }
 
-    private void showDialog() {
+    private void showDialog(Song song) {
+        Long id_song = song.getId();
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet);
@@ -111,7 +123,21 @@ public class SongManagerFragment extends Fragment {
         deteteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "click Delete", Toast.LENGTH_SHORT).show();
+                songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+                songApi.deleteSong(id_song).enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Toast.makeText(getActivity(),response.body(),Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
+                        onResume();
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 
@@ -119,10 +145,9 @@ public class SongManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Song data = songList.get(currentPosition);
+                dialog.cancel();
                 Intent intent = new Intent(getActivity(), EditSongActivity.class);
-                intent.putExtra("data", "1");
-                Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
-
+                intent.putExtra("data", data);
                 startActivity(intent);
             }
         });
@@ -131,7 +156,12 @@ public class SongManagerFragment extends Fragment {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
+        dialog.getWindow().setGravity(Gravity.CENTER);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        init();
+        // Perform any necessary updates here
     }
 }

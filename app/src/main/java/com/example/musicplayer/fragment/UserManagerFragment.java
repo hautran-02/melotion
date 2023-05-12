@@ -62,7 +62,7 @@ public class UserManagerFragment extends Fragment  {
 
     private void loadData(){
 
-        mRecyclerView = view.findViewById(R.id.rcvSongListManager);
+        mRecyclerView = view.findViewById(R.id.rcvUserListManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Create a list of songs
@@ -91,7 +91,6 @@ public class UserManagerFragment extends Fragment  {
 
     private void init() {
         btnAdd = view.findViewById(R.id.btnForwardAddSong);
-        System.out.println(btnAdd);
         setEvent();
         loadData();
     }

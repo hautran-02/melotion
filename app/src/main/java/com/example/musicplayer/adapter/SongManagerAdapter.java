@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.musicplayer.R;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
@@ -36,8 +37,12 @@ public class SongManagerAdapter extends RecyclerView.Adapter<SongManagerAdapter.
         Song song = mSongList.get(position);
 
         holder.mSongName.setText(song.getName());
-        holder.mArtistTextView.setText(song.getArtist());
-        holder.mImageView.setImageResource(song.getImage());
+        holder.mArtistTextView.setText(song.getSinger());
+
+//        holder.mImageView.setImageResource(song.getImage());
+        Glide.with(holder.itemView.getContext())
+                .load(song.getImage())
+                .into(holder.mImageView);
     }
 
     @Override

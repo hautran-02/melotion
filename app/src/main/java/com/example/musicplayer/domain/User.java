@@ -24,17 +24,19 @@ public class User {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("favourites")
-    private List<Favourite> favourites;
+    @SerializedName("role")
+    private String role;
 
-    public User(long id, String phone, String first_name, String last_name, String email, String password, List<Favourite> favourites) {
+
+
+    public User(long id, String phone, String first_name, String last_name, String email, String password, String role) {
         this.id = id;
         this.phone = phone;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.role = role;
         this.password = password;
-        this.favourites = favourites;
     }
 
     public User(long id, String phone, String first_name, String last_name, String email) {
@@ -101,11 +103,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Favourite> getFavourites() {
-        return favourites;
+    public String getRole() {
+        return role;
     }
 
-    public void setFavourites(List<Favourite> favourites) {
-        this.favourites = favourites;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
