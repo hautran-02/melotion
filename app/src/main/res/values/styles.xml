@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimary">@color/pri_red</item>
         <item name="colorPrimaryDark">@color/pri_black</item>
@@ -15,6 +15,7 @@
     </style>
     <style name="h2">
         <item name="android:textColor">@color/primary</item>
+        <item name="fontFamily">@font/bold</item>
         <item name="android:textSize">24dp</item>
         <item name="android:gravity">center</item>
         <item name="android:ellipsize">end</item>
@@ -25,7 +26,6 @@
         <item name="android:textSize">20dp</item>
         <item name="android:gravity">center</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
     </style>
     <style name="h4">
         <item name="android:textColor">@color/primary</item>
@@ -158,5 +158,33 @@
     <style name="btn_bottom">
 
     </style>
+
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">64dp</item>
+        <!-- Or if wants different radii depending on the corner. -->
+<!--        <item name="neumorph_cornerSizeTopLeft">16dp</item>-->
+<!--        <item name="neumorph_cornerSizeTopRight">16dp</item>-->
+<!--        <item name="neumorph_cornerSizeBottomLeft">16dp</item>-->
+<!--        <item name="neumorph_cornerSizeBottomRight">16dp</item>-->
+    </style>
+
+    <style name="bg_primary" parent="android:Widget">
+        <item name="android:padding">@dimen/design_default_padding</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_anim_neumorph</item>
+        <item name="neumorph_inset">@dimen/design_default_inset</item>
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/shadowColorLight</item>
+        <item name="neumorph_shadowColorDark">@color/shadowColorDark</item>
+        <item name="neumorph_shapeType">flat</item>
+        <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
+        <item name="neumorph_lightSource">leftTop</item>
+        <item name="neumorph_backgroundColor">@color/bg_layout</item>
+    </style>
+
+
+    <!--  Header: start  -->
+
+    <!--  Header: end  -->
 
 </resources>
