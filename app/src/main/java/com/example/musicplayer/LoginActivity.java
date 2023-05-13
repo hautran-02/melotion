@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserMessage> call, Response<UserMessage> response) {
                             UserMessage userLogin = response.body();
+//                            System.out.println("-----------------");
+//                            System.out.println(userLogin.getUser().getRole());
                             if (userLogin.getUser()!= null) {
                                 // Xử lý kết quả trả về nếu thành công
                                 Toast.makeText(LoginActivity.this, userLogin.getMessage(), Toast.LENGTH_SHORT).show();
@@ -64,11 +66,23 @@ public class LoginActivity extends AppCompatActivity {
                                         userLogin.getUser().getPhone(),
                                         userLogin.getUser().getFirst_name(),
                                         userLogin.getUser().getFirst_name(),
-                                        userLogin.getUser().getEmail()
+                                        userLogin.getUser().getEmail(),
+                                        userLogin.getUser().getPassword(),
+                                        userLogin.getUser().getRole()
                                 );
+                                System.out.println("-----------------");
+                                System.out.println(user.getRole());
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                startActivity(intent);
+                                if(user.getRole().equals("user")){
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                }
+                                else {
+                                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                                    startActivity(intent);
+                                }
                             } else {
                                 // Xử lý lỗi nếu kết quả trả về không thành công
                                 Toast.makeText(LoginActivity.this, userLogin.getMessage(), Toast.LENGTH_SHORT).show();

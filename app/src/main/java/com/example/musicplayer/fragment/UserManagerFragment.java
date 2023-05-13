@@ -63,9 +63,9 @@ public class UserManagerFragment extends Fragment  {
 
         // Create a list of songs
         userList = new ArrayList<User>();
-        userList.add(new User(1, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
-        userList.add(new User(2, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
-        userList.add(new User(3, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
+//        userList.add(new User(1, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
+//        userList.add(new User(2, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
+//        userList.add(new User(3, "0354872144", "Hau", "Tran", "hautran@020132", "12345"));
 
         // Create and set the adapter for the RecyclerView
         mUserAdapter = new UserAdapter(userList);

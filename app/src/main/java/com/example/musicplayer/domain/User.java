@@ -25,12 +25,18 @@ public class User implements Serializable {
     @SerializedName("password")
     private String password;
 
-    public User(long id, String phone, String first_name, String last_name, String email, String password) {
+    @SerializedName("role")
+    private String role;
+
+
+
+    public User(long id, String phone, String first_name, String last_name, String email, String password, String role) {
         this.id = id;
         this.phone = phone;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.role = role;
         this.password = password;
     }
 
@@ -96,6 +102,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

@@ -79,7 +79,7 @@
             <EditText
                 android:id="@+id/edSinger"
                 android:layout_width="@dimen/ed_width"
-                android:layout_height="54dp"
+                android:layout_height="61dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/ed_layout"
@@ -91,6 +91,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/style_spinner"
+                android:ems="10" />
+
             <LinearLayout
                 android:layout_width="@dimen/ed_width"
                 android:layout_height="match_parent"
@@ -99,6 +108,7 @@
 
                 <TextView
                     style="@style/h3"
+                    android:id="@+id/tvSong"
                     android:layout_width="221dp"
                     android:layout_height="match_parent"
                     android:textColor="@color/primary"
@@ -128,6 +138,7 @@
 
                 <TextView
                     style="@style/h3"
+                    android:id="@+id/tvImage"
                     android:layout_width="221dp"
                     android:layout_height="match_parent"
                     android:textColor="@color/primary"
@@ -148,7 +159,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />
 
             </LinearLayout>
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"

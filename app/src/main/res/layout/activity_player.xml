@@ -7,70 +7,98 @@
     android:background="@color/bg_layout">
 
     <ScrollView
-        android:layout_width="403dp"
-        android:layout_height="732dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:orientation="vertical"
             android:paddingLeft="@dimen/pd_2"
             android:paddingRight="@dimen/pd_2">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/mg_2"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="@dimen/btn_height"
-                    android:layout_height="@dimen/btn_height"
-                    android:background="@drawable/bg_image_btn"
-                    android:contentDescription="@string/back"
-                    android:elevation="2dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_back"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvSongNamePlayer"
-                    style="@style/h1"
-                    android:layout_width="154dp"
+                <soup.neumorphism.NeumorphCardView
+                    style="@style/bg_primary"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="12dp"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:ellipsize="marquee"
-                    android:scrollHorizontally="true"
-                    android:singleLine="true"
-                    android:text="@string/topbar_player"
-                    android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/imageButton"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_weight="25">
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="@dimen/btn_height"
+                        android:layout_height="@dimen/btn_height"
+                        android:background="@drawable/bg_image_btn"
+                        android:contentDescription="@string/back"
+                        android:padding="@dimen/pd_1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_back" />
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    style="@style/bg_primary"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70">
+
+                    <TextView
+                        android:id="@+id/tvSongNamePlayer"
+                        style="@style/h1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingLeft="@dimen/pd_2"
+                        android:paddingRight="@dimen/pd_2"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text="@string/topbar_player"
+                        android:textAlignment="center"
+                        app:layout_constraintStart_toEndOf="@+id/imageButton"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </soup.neumorphism.NeumorphCardView>
+
+                <soup.neumorphism.NeumorphCardView
+                    style="@style/bg_primary"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25">
+
+                    <ImageButton
+                        android:id="@+id/imageOptions"
+                        android:layout_width="@dimen/btn_height"
+                        android:layout_height="@dimen/btn_height"
+                        android:background="@drawable/bg_image_btn"
+                        android:contentDescription="@string/back"
+                        android:padding="@dimen/pd_1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_back" />
+                </soup.neumorphism.NeumorphCardView>
+
             </LinearLayout>
 
-
-            <!--color = #552C2C-->
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgDisc"
                 android:layout_width="match_parent"
                 android:layout_height="310dp"
                 android:layout_marginTop="90dp"
-                android:src="@drawable/rangkhon"
-                app:civ_border_color="#000000"
-                app:civ_border_width="50dp"
                 android:foreground="@drawable/circle_small"
-                android:foregroundGravity="center"/>
+                android:foregroundGravity="center"
+                android:src="@drawable/rangkhon"
+                app:civ_border_color="#595959"
+                app:civ_border_overlay="true"
+                app:civ_border_width="50dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,21 +126,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_weight="1"
                         android:text="00:00"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:layout_weight="1"/>
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/tvTotalTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_weight="1"
                         android:text="00:11"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
                         android:textAlignment="textEnd"
-                        android:layout_weight="1"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -121,35 +149,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/pd_2"
-                android:paddingRight="@dimen/pd_2"
                 android:paddingTop="@dimen/pd_2"
-                android:gravity="center">
+                android:paddingRight="@dimen/pd_2">
 
                 <ImageView
                     android:id="@+id/imgPre"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_margin="@dimen/mg_2"
-                    android:src="@drawable/ic_previous"
-                    android:contentDescription="@string/player_btn"/>
+                    android:contentDescription="@string/player_btn"
+                    android:src="@drawable/ic_previous" />
 
                 <ImageView
                     android:id="@+id/imgPlay"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_margin="@dimen/mg_2"
-                    android:src="@drawable/ic_play"
-                    android:contentDescription="@string/player_btn"/>
+                    android:contentDescription="@string/player_btn"
+                    android:src="@drawable/ic_play" />
 
                 <ImageView
                     android:id="@+id/imgNext"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_margin="@dimen/mg_2"
-                    android:src="@drawable/ic_next"
-                    android:contentDescription="@string/player_btn"/>
+                    android:contentDescription="@string/player_btn"
+                    android:src="@drawable/ic_next" />
 
             </LinearLayout>
 

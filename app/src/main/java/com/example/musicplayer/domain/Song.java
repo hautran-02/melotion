@@ -31,7 +31,7 @@ public class Song implements Serializable {
         this.category = category;
     }
 
-    public Song(){}
+    public Song(String s, String s1, int default_song){}
 
     public long getId() {
         return id;
