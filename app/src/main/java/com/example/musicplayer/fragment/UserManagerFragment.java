@@ -85,6 +85,9 @@ public class UserManagerFragment extends Fragment  {
     }
 
     private void init() {
+
+        btnAdd = view.findViewById(R.id.btnForwardAddSong);
+
         setEvent();
         loadData();
     }

@@ -64,7 +64,7 @@ public class SongListFragment extends Fragment {
         // Initialize the RecyclerView
         mRecyclerView = View.findViewById(R.id.rcvSongList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        GetSong();
+        getSong();
         return View;
     }
 
@@ -80,7 +80,7 @@ public class SongListFragment extends Fragment {
         }
     }
 
-    private void GetSong(){
+    private void getSong(){
         songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
 
         songApi.SongCategory(categoryId).enqueue(new Callback<SongMessage>() {
