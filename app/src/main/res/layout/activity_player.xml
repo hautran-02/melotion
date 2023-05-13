@@ -98,11 +98,7 @@
                 app:civ_border_overlay="true"
                 app:civ_border_width="50dp"
                 android:foreground="@drawable/circle_small"
-                android:foregroundGravity="center"
-                android:src="@drawable/rangkhon"
-                app:civ_border_color="#595959"
-                app:civ_border_overlay="true"
-                app:civ_border_width="50dp" />
+                android:foregroundGravity="center" />
 
             <ImageView
                 android:id="@+id/favorite"

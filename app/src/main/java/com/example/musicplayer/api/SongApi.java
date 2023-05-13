@@ -31,7 +31,7 @@ public interface SongApi {
 
     @FormUrlEncoded
     @POST("song/delete")
-    Call<String> deleteSong(@Field("id") Long id);
+    Call<SongMessage> deleteSong(@Field("id") Long id);
 
     @PUT("song/update/{id}")
     Call<SongMessage> update(@Path("id") long id, @Body SongUpdate song);

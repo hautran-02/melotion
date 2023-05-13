@@ -1,5 +1,6 @@
 package com.example.musicplayer;
 
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,13 +10,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.musicplayer.RealPathUtil.RealPathUtil;
+import com.example.musicplayer.adapter.CategorySpinnerAdapter;
+import com.example.musicplayer.api.CategoryApi;
+import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.domain.Category;
 import com.example.musicplayer.domain.Song;
+import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.domain.SongUpdate;
+import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.io.File;
+import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SongFormActivity extends AppCompatActivity {
     Button btnSubmit, btnCancel;
@@ -29,6 +48,13 @@ public class SongFormActivity extends AppCompatActivity {
     private static final int PICK_MP3_REQUEST = 2;
     private Uri mImageUri, mSongUri;
 
+    File fileImage, fileMp3;
+    Spinner spCategory;
+    CategoryApi categoryApi;
+    List<Category> categories;
+    CategorySpinnerAdapter spinneradapter;
+
+    SongApi songApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +64,23 @@ public class SongFormActivity extends AppCompatActivity {
     }
 
     private void setEvent() {
-        btnChooseImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });
+        if(isEditForm == false) {
 
-        btnChooseSong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseSong();
-            }
-        });
+
+            btnChooseImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    chooseImage();
+                }
+            });
+
+            btnChooseSong.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    chooseSong();
+                }
+            });
+        }
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +100,7 @@ public class SongFormActivity extends AppCompatActivity {
     private void loadData(){
 //        Check: is Edit Form or Add Form
         if(data != null){
+            setSpinnerEdit();
             isEditForm = true;
             tvTitle.setText(getResources().getString(R.string.add_song));
             edName.setText(data.getName());
@@ -79,6 +110,7 @@ public class SongFormActivity extends AppCompatActivity {
             tvSongLink.setText(data.getLink());
             btnSubmit.setText(getResources().getString(R.string.add));
         } else{
+            setSpinnerAdd();
             isEditForm = false;
             tvTitle.setText(getResources().getString(R.string.add_song));
 //            edName.setText("");
@@ -89,6 +121,49 @@ public class SongFormActivity extends AppCompatActivity {
             btnSubmit.setText(getResources().getString(R.string.add));
         }
     }
+    private void setSpinnerEdit() {
+        spCategory = findViewById(R.id.spCategory);
+        categoryApi= RetrofitClient.getInstance().getRetrofit().create(CategoryApi.class);
+        List<Category> categoryList;
+        categoryApi.getAllCategory().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                categories = response.body();
+                spinneradapter = new CategorySpinnerAdapter(categories,SongFormActivity.this);
+                spCategory.setAdapter(spinneradapter);
+                int i =0,pos =0;
+                for(Category category:categories)
+                {
+                    if(category.getName().equals(data.getCategory().getName())){
+                        pos = i;
+                    }
+                    i++;
+                }
+                spCategory.setSelection(pos);
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+            }
+        });
+    }
+    private void setSpinnerAdd() {
+        spCategory = findViewById(R.id.spCategory);
+        categoryApi= RetrofitClient.getInstance().getRetrofit().create(CategoryApi.class);
+        categoryApi.getAllCategory().enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                categories = response.body();
+                spinneradapter = new CategorySpinnerAdapter(categories,SongFormActivity.this);
+                spCategory.setAdapter(spinneradapter);
+            }
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void init(){
         btnChooseImg = findViewById(R.id.btnUpSongImg);
@@ -97,16 +172,16 @@ public class SongFormActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnSongCancel);
         edName = findViewById(R.id.edSongName);
         edAuthor = findViewById(R.id.edSongAuthor);
-        edSinger = findViewById(R.id.edSinger);
+        edSinger = findViewById(R.id.edSongSinger);
         tvTitle = findViewById(R.id.tvTitleSong);
         tvSongImg = findViewById(R.id.tvSongImg);
         tvSongLink = findViewById(R.id.tvSongLink);
 
         Intent intent = getIntent();
         data = (Song) intent.getSerializableExtra("data");
-
-        setEvent();
         loadData();
+        setEvent();
+
     }
 
     //Upload Image
@@ -117,31 +192,17 @@ public class SongFormActivity extends AppCompatActivity {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageUri = data.getData();
-
-            // Create a File object from the Uri
-            File file = new File(getRealPathFromURI(mImageUri));
-
-            System.out.println(file);
+            String IMAGE_PATH= RealPathUtil.getRealPath(this,mImageUri);
+            fileImage = new File(IMAGE_PATH);
+            tvSongImg.setText(fileImage.getName());
         } else if (requestCode == PICK_MP3_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mSongUri = data.getData();
+            String IMAGE_PATH= RealPathUtil.getRealPath(this,mSongUri);
             // Handle the selected MP3 file here
-
-            File file = new File(getRealPathFromURI(mSongUri));
-            System.out.println(mSongUri);
+            fileMp3 = new File(IMAGE_PATH);
+            tvSongLink.setText(fileMp3.getName());
         }
     }
-
-    // This method is used to get the real path of a Uri
-    public String getRealPathFromURI(Uri contentUri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
-        return filePath;
-    }
-
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -156,11 +217,17 @@ public class SongFormActivity extends AppCompatActivity {
     }
 
     private void submit(){
+        int position = spCategory.getSelectedItemPosition();
+        songApi= RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+        obj = new Song();
         obj.setName(String.valueOf(edName.getText()));
         obj.setAuthor(String.valueOf(edAuthor.getText()));
         obj.setSinger(String.valueOf(edSinger.getText()));
-        obj.setImage(String.valueOf(tvSongImg.getText()));
-        obj.setLink(String.valueOf(tvSongLink.getText()));
+        obj.setCategory((Category) spinneradapter.getItem(position));
+        System.out.println("------------"+position);
+        System.out.println("------------"+obj.getCategory().getName());
+//        obj.setImage(String.valueOf(tvSongImg.getText()));
+//        obj.setLink(String.valueOf(tvSongLink.getText()));
 
         if(isEditForm){
             edit();
@@ -170,10 +237,62 @@ public class SongFormActivity extends AppCompatActivity {
     }
 
     private void edit(){
+        Long id = data.getId();
 
+        SongUpdate songUpdate = new SongUpdate();
+        songUpdate.setAuthor(obj.getAuthor());
+        songUpdate.setName(obj.getName());
+        songUpdate.setSinger(obj.getSinger());
+        songUpdate.setCategory(obj.getCategory());
+        songApi.update(id, songUpdate).enqueue(new Callback<SongMessage>() {
+            @Override
+            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                System.out.println("---------------");
+                Toast.makeText(SongFormActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT);
+//                System.out.println(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<SongMessage> call, Throwable t) {
+
+            }
+        });
     }
 
     private void add() {
+        int position = spCategory.getSelectedItemPosition();
+        // Tạo một đối tượng RequestBody từ tệp tin
+        RequestBody requestFileImage=RequestBody.create(MediaType.parse("multipart/form-data"), fileImage);
+        RequestBody requestFileMp3=RequestBody.create(MediaType.parse("multipart/form-data"), fileMp3);
 
+        // Tạo một đối tượng MultipartBody.Part từ RequestBody
+        MultipartBody.Part image = MultipartBody.Part.createFormData("image", fileImage.getName(), requestFileImage);
+        MultipartBody.Part mp3 = MultipartBody.Part.createFormData("file", fileMp3.getName(), requestFileMp3);
+
+        String songName = edName.getText().toString().trim();
+        RequestBody requestSongName = RequestBody.create(MediaType.parse("text/plain"), songName);
+
+        String author = edAuthor.getText().toString().trim();
+        RequestBody requestAuthor = RequestBody.create(MediaType.parse("text/plain"), author);
+
+        String singer = edSinger.getText().toString().trim();
+        RequestBody requestSinger = RequestBody.create(MediaType.parse("text/plain"), singer);
+
+        Category selectedCategory = (Category) spinneradapter.getItem(position);
+        Long id  = selectedCategory.getId();
+        RequestBody requestIdCategory = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
+
+        songApi = RetrofitClient.getRetrofit().create(SongApi.class);
+        songApi.createSong(mp3, image, requestSongName, requestAuthor, requestSinger, requestIdCategory).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(SongFormActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
 }

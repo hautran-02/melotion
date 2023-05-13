@@ -66,7 +66,14 @@
                     android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+                <Spinner
+                    android:id="@+id/spCategory"
+                    android:layout_width="@dimen/ed_width"
+                    android:layout_height="61dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/style_spinner"
+                    android:ems="10" />
                 <LinearLayout
                     style="@style/layout_row_img">
 

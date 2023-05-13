@@ -15,17 +15,26 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.CategoryFormActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapter.CategoryAdapter;
+import com.example.musicplayer.api.CategoryApi;
+import com.example.musicplayer.api.UserApi;
 import com.example.musicplayer.domain.Category;
+import com.example.musicplayer.domain.CategoryMessage;
 import com.example.musicplayer.domain.OnItemClickListener;
+import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoryManagerFragment extends Fragment {
     ImageButton btnAdd;
@@ -34,6 +43,8 @@ public class CategoryManagerFragment extends Fragment {
     int currentPosition;
     private RecyclerView mRecyclerView;
     private CategoryAdapter mAdapter;
+
+    CategoryApi categoryApi;
     public CategoryManagerFragment() {
         // Required empty public constructor
     }
@@ -54,27 +65,36 @@ public class CategoryManagerFragment extends Fragment {
     private void loadData(){
 
         mRecyclerView = view.findViewById(R.id.rcvCategoryManager);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
 
         // Create a list of songs
-        categoryList = new ArrayList<Category>();
-        categoryList.add(new Category(1, "Rap", "https://media.vov.vn/sites/default/files/styles/large/public/2022-01/top_8_rv_mua_2_0.jpg", "Danh sách 100 bài hát Rap Việt hot nhất được NhacCuaTui cập nhật liên tục dựa theo lượt nghe, yêu thích trên nhiều nền tảng."));
-        categoryList.add(new Category(2, "Classic", "https://media.vov.vn/sites/default/files/styles/large/public/2022-01/top_8_rv_mua_2_0.jpg", "Danh sách 100 bài hát Rap Việt hot nhất được NhacCuaTui cập nhật liên tục dựa theo lượt nghe, yêu thích trên nhiều nền tảng."));
-        categoryList.add(new Category(3, "Morden", "https://media.vov.vn/sites/default/files/styles/large/public/2022-01/top_8_rv_mua_2_0.jpg", "Danh sách 100 bài hát Rap Việt hot nhất được NhacCuaTui cập nhật liên tục dựa theo lượt nghe, yêu thích trên nhiều nền tảng."));
-
+        getCategory();
         // Create and set the adapter for the RecyclerView
-        mAdapter = new CategoryAdapter(categoryList);
-        mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+    }
+
+    private void getCategory(){
+        categoryApi= RetrofitClient.getInstance().getRetrofit().create(CategoryApi.class);
+        categoryApi.getAllCategory().enqueue(new Callback<List<Category>>() {
             @Override
-            public void onItemClick(int position) {
-//                User data = userList.get(position);
-//
-//                Intent intent = new Intent(getActivity(), EditUserActivity.class);
-//                intent.putExtra("data", data.getId());
-//                startActivity(intent);
-                showDialog();
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                categoryList = response.body();
+                mAdapter = new CategoryAdapter(categoryList);
+                mRecyclerView.setAdapter(mAdapter);
+
+                mAdapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Category data = categoryList.get(position);
+                        showDialog(data);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+
             }
         });
     }
@@ -84,7 +104,7 @@ public class CategoryManagerFragment extends Fragment {
         loadData();
     }
 
-    private void showDialog() {
+    private void showDialog(Category data) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet);
@@ -95,6 +115,21 @@ public class CategoryManagerFragment extends Fragment {
         deteteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                categoryApi = RetrofitClient.getInstance().getRetrofit().create(CategoryApi.class);
+                categoryApi.delete(data.getId()).enqueue(new Callback<CategoryMessage>() {
+                    @Override
+                    public void onResponse(Call<CategoryMessage> call, Response<CategoryMessage> response) {
+                        CategoryMessage categoryMessage = response.body();
+                        Toast.makeText(getActivity(), categoryMessage.getMessage(), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        onResume();
+                    }
+
+                    @Override
+                    public void onFailure(Call<CategoryMessage> call, Throwable t) {
+
+                    }
+                });
                 Toast.makeText(getActivity(), "click Delete", Toast.LENGTH_SHORT).show();
             }
         });
@@ -102,7 +137,6 @@ public class CategoryManagerFragment extends Fragment {
         editLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Category data = categoryList.get(currentPosition);
                 Intent intent = new Intent(getActivity(), CategoryFormActivity.class);
                 intent.putExtra("data", data);
                 Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
