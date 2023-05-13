@@ -16,8 +16,10 @@
     <dimen name="radius">32dp</dimen>
     <dimen name="appbar_height"></dimen>
     <dimen name="btn_height">56dp</dimen>
+    <dimen name="ic_size">24dp</dimen>
+    <dimen name="ic_size_viewport">24</dimen>
     <dimen name="btn_stroke">2dp</dimen>
-    <dimen name="btn_player">64dp</dimen>
+    <dimen name="btn_player">32dp</dimen>
     <dimen name="ed_width">320dp</dimen>
 
 </resources>
