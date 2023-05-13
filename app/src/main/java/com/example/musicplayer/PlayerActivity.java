@@ -21,9 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.musicplayer.adapter.SongAdapter;
+import com.example.musicplayer.api.FavouriteApi;
 import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.api.UserApi;
+import com.example.musicplayer.domain.FavouriteMessage;
 import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.domain.User;
 import com.example.musicplayer.retrofit.RetrofitClient;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +44,7 @@ public class PlayerActivity extends AppCompatActivity {
     TextView tvSongNamePlayer, tvTotalTime, tvTime;
     CircleImageView imgDisc;
     SeekBar seekBar;
-    ImageView imgPre, imgPlay, imgNext;
+    ImageView imgPre, imgPlay, imgNext, favorite;
     ObjectAnimator objectAnimator;
 
     MediaPlayer mediaPlayer;
@@ -49,7 +53,11 @@ public class PlayerActivity extends AppCompatActivity {
 
     private SongAdapter mSongAdapter;
     static int position;
+
+    static Boolean favourite;
     List<Song> songs;
+    FavouriteApi favouriteApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +69,32 @@ public class PlayerActivity extends AppCompatActivity {
         Song songCurrent = songs.get(position);
         init();
         playMusic(songCurrent);
+    }
+
+    private void setFavourite(Song song){
+        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        /// Viet tiep
+        favouriteApi = RetrofitClient.getInstance().getRetrofit().create(FavouriteApi.class);
+
+        favouriteApi.findFavorite(song.getId(),user.getId()).enqueue(new Callback<FavouriteMessage>() {
+            @Override
+            public void onResponse(Call<FavouriteMessage> call, Response<FavouriteMessage> response) {
+                FavouriteMessage favouriteMessage = response.body();
+                if(favouriteMessage.getMessage().equals("Successful")){
+                    favorite.setImageResource(R.drawable.ic_favorite_black);
+                    favourite = true;
+                }
+                else {
+                    favorite.setImageResource(R.drawable.ic_favorite_white);
+                    favourite = false;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FavouriteMessage> call, Throwable t) {
+
+            }
+        });
     }
 
     private void playMusic(){
@@ -101,6 +135,47 @@ public class PlayerActivity extends AppCompatActivity {
         objectAnimator.pause();;
         playMusic(songs.get(position));
     }
+
+    private void favoriteSong(Song song){
+        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        favouriteApi = RetrofitClient.getInstance().getRetrofit().create(FavouriteApi.class);
+        if(favourite == false){
+            favouriteApi.addFavourite(song.getId(),user.getId()).enqueue(new Callback<FavouriteMessage>() {
+                @Override
+                public void onResponse(Call<FavouriteMessage> call, Response<FavouriteMessage> response) {
+                    FavouriteMessage favouriteMessage = response.body();
+                    favorite.setImageResource(R.drawable.ic_favorite_black);
+                    favourite = true;
+                    System.out.println(favouriteMessage.getMessage());
+                }
+
+                @Override
+                public void onFailure(Call<FavouriteMessage> call, Throwable t) {
+
+                }
+            });
+        }
+        else {
+            System.out.println("11111111------------");
+            favouriteApi.deleteFavorite(song.getId(),user.getId()).enqueue(new Callback<FavouriteMessage>() {
+                @Override
+                public void onResponse(Call<FavouriteMessage> call, Response<FavouriteMessage> response) {
+                    FavouriteMessage favouriteMessage = response.body();
+                    System.out.println(favouriteMessage.getMessage());
+                    favorite.setImageResource(R.drawable.ic_favorite_white);
+                    favourite = false;
+                }
+
+                @Override
+                public void onFailure(Call<FavouriteMessage> call, Throwable t) {
+
+                }
+            });
+        }
+
+        /// Viet tiep
+
+    }
     private void rontation() {
         imgDisc.setRotation(45);
         objectAnimator = ObjectAnimator.ofFloat(imgDisc, "rotation",0f,360f);
@@ -112,6 +187,8 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void playMusic(Song song){
+        favourite = false;
+        setFavourite(song);
         tvSongNamePlayer.setText(song.getName()+"("+song.getSinger()+"-"+song.getAuthor()+")");
         imgPlay.setImageResource(R.drawable.ic_pause);
         tvSongNamePlayer.setSelected(true);
@@ -122,6 +199,7 @@ public class PlayerActivity extends AppCompatActivity {
         imgPlay.setOnClickListener(view -> playMusic());
         imgPre.setOnClickListener(view -> playPreSong(songs));
         imgNext.setOnClickListener(view -> playNextSong(songs));
+        favorite.setOnClickListener(view -> favoriteSong(song));
     }
     private void init(){
         imgDisc = findViewById(R.id.imgDisc);
@@ -132,6 +210,8 @@ public class PlayerActivity extends AppCompatActivity {
         imgNext= findViewById(R.id.imgNext);
         tvTime = findViewById(R.id.tvTime);
         tvSongNamePlayer = findViewById(R.id.tvSongNamePlayer);
+        favorite = findViewById(R.id.favorite);
+
     }
 
     class PlayMp3 extends AsyncTask<String, Void, String>{

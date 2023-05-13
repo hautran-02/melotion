@@ -7,173 +7,173 @@
     android:orientation="vertical"
     android:background="@color/bg_layout">
 
-<!--&lt;!&ndash;    <ScrollView&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_height="732dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        android:layout_marginStart="4dp"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;        app:layout_constraintTop_toTopOf="parent">&ndash;&gt;-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="732dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--&lt;!&ndash;        <LinearLayout&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:orientation="vertical"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:paddingLeft="@dimen/pd_2"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:paddingRight="@dimen/pd_2">&ndash;&gt;-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/pd_2"
+            android:paddingRight="@dimen/pd_2">
 
-<!--&lt;!&ndash;            <LinearLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="80dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:orientation="horizontal"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center_horizontal">&ndash;&gt;-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
 
-<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/tvCancel"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    style="@style/h4"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:text="@string/cancel"/>&ndash;&gt;-->
+                <TextView
+                    android:id="@+id/tvCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    style="@style/h4"
+                    android:text="@string/cancel"/>
 
-<!--&lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
-<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/tvTitle"&ndash;&gt;-->
-<!--&lt;!&ndash;                style="@style/h1"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:background="@color/transparent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:hint="@string/edit_song"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textColor="@color/primary"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textColorHint="@color/primary"&ndash;&gt;-->
-<!--&lt;!&ndash;                tools:layout_editor_absoluteX="56dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                tools:layout_editor_absoluteY="0dp" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/edSongName"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="@dimen/ed_width"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="61dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="40dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:background="@drawable/ed_layout"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:ems="10"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:hint="@string/song_name"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingLeft="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingRight="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/textView" />&ndash;&gt;-->
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/h1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:hint="@string/edit_song"
+                android:textColor="@color/primary"
+                android:textColorHint="@color/primary"
+                tools:layout_editor_absoluteX="56dp"
+                tools:layout_editor_absoluteY="0dp" />
+            <EditText
+                android:id="@+id/edSongName"
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/ed_layout"
+                android:ems="10"
+                android:hint="@string/song_name"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/edAuthor"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="@dimen/ed_width"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="61dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="16dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:background="@drawable/ed_layout"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:ems="10"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:hint="@string/song_author"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingLeft="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingRight="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/textView" />&ndash;&gt;-->
+            <EditText
+                android:id="@+id/edAuthor"
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ed_layout"
+                android:ems="10"
+                android:hint="@string/song_author"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/edSinger"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="@dimen/ed_width"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="54dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="16dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:background="@drawable/ed_layout"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:ems="10"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:hint="@string/song_signer"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:inputType="text"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingLeft="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:paddingRight="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/textView" />&ndash;&gt;-->
+            <EditText
+                android:id="@+id/edSinger"
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="54dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/ed_layout"
+                android:ems="10"
+                android:hint="@string/song_signer"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-<!--            <Spinner-->
-<!--                android:id="@+id/spCategory"-->
-<!--                android:layout_width="@dimen/ed_width"-->
-<!--                android:layout_height="61dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:background="@drawable/style_spinner"-->
-<!--                android:ems="10" />-->
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/style_spinner"
+                android:ems="10" />
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="@dimen/ed_width"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_marginTop="@dimen/mg_2"-->
-<!--                android:layout_gravity="center">-->
+            <LinearLayout
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/mg_2"
+                android:layout_gravity="center">
 
-<!--                <TextView-->
-<!--                    style="@style/h3"-->
-<!--                    android:id="@+id/tvSong"-->
-<!--                    android:layout_width="221dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:textColor="@color/primary"-->
-<!--                    android:ellipsize="end"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:gravity=""-->
-<!--                    android:text="@string/song_link" />-->
+                <TextView
+                    style="@style/h3"
+                    android:id="@+id/tvSong"
+                    android:layout_width="221dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primary"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:gravity=""
+                    android:text="@string/song_link" />
 
-<!--&lt;!&ndash;                <androidx.appcompat.widget.AppCompatButton&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/btnChooseLink"&ndash;&gt;-->
-<!--&lt;!&ndash;                    style="@style/button"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:backgroundTint="@color/primary"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:text="@string/upload"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />&ndash;&gt;-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnChooseLink"
+                    style="@style/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/primary"
+                    android:text="@string/upload"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />
 
-<!--&lt;!&ndash;            </LinearLayout>&ndash;&gt;-->
+            </LinearLayout>
 
-<!--&lt;!&ndash;            <LinearLayout&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="@dimen/ed_width"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="@dimen/mg_2"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center">&ndash;&gt;-->
+            <LinearLayout
+                android:layout_width="@dimen/ed_width"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/mg_2"
+                android:layout_gravity="center">
 
-<!--                <TextView-->
-<!--                    style="@style/h3"-->
-<!--                    android:id="@+id/tvImage"-->
-<!--                    android:layout_width="221dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:textColor="@color/primary"-->
-<!--                    android:ellipsize="end"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:gravity=""-->
-<!--                    android:text="@string/song_img" />-->
+                <TextView
+                    style="@style/h3"
+                    android:id="@+id/tvImage"
+                    android:layout_width="221dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/primary"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:gravity=""
+                    android:text="@string/song_img" />
 
-<!--&lt;!&ndash;                <androidx.appcompat.widget.AppCompatButton&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/btnChooseImage"&ndash;&gt;-->
-<!--&lt;!&ndash;                    style="@style/button"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:backgroundTint="@color/primary"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:text="@string/upload"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />&ndash;&gt;-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnChooseImage"
+                    style="@style/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/primary"
+                    android:text="@string/upload"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />
 
-<!--            </LinearLayout>-->
+            </LinearLayout>
 
 
-<!--&lt;!&ndash;            <androidx.appcompat.widget.AppCompatButton&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/btnSubmit"&ndash;&gt;-->
-<!--&lt;!&ndash;                style="@style/button"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="237dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="58dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_gravity="center"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="20dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:backgroundTint="@color/primary"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:text="@string/edit"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />&ndash;&gt;-->
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSubmit"
+                style="@style/button"
+                android:layout_width="237dp"
+                android:layout_height="58dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/primary"
+                android:text="@string/edit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edLoginPw" />
 
-<!--&lt;!&ndash;        </LinearLayout>&ndash;&gt;-->
-<!--&lt;!&ndash;    </ScrollView>&ndash;&gt;-->
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

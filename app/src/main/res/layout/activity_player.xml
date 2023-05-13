@@ -93,6 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="310dp"
                 android:layout_marginTop="90dp"
+                android:src="@drawable/rangkhon"
+                app:civ_border_color="#595959"
+                app:civ_border_overlay="true"
+                app:civ_border_width="50dp"
                 android:foreground="@drawable/circle_small"
                 android:foregroundGravity="center"
                 android:src="@drawable/rangkhon"
@@ -100,10 +104,20 @@
                 app:civ_border_overlay="true"
                 app:civ_border_width="50dp" />
 
+            <ImageView
+                android:id="@+id/favorite"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="18dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_favorite_white" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 

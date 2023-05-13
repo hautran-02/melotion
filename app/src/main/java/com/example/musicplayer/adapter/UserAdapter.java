@@ -34,12 +34,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(UserAdapter.UserViewHolder holder, int position) {
         User user = mUserList.get(position);
-
+        String pos = String.valueOf(position);
         holder.mFirstName.setText(user.getFirst_name());
         holder.mLastName.setText(user.getLast_name());
         holder.mEmail.setText(user.getEmail());
         holder.mPhone.setText(user.getPhone());
-        holder.mPassword.setText(user.getPassword());
+        //holder.mPassword.setText(user.getPassword());
+        holder.tvNumber.setText(pos);
     }
 
     @Override
@@ -49,10 +50,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView tvNumber;
         public TextView mFirstName;
         public TextView mLastName;
         public TextView mPhone;
-        public TextView mPassword;
+//        public TextView mPassword;
         public TextView mEmail;
 
         public UserViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -61,7 +63,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             mLastName = itemView.findViewById(R.id.tvLastName);
             mPhone = itemView.findViewById(R.id.tvPhone);
             mEmail = itemView.findViewById(R.id.tvEmail);
-            mPassword = itemView.findViewById(R.id.tvPassword);
+            tvNumber = itemView.findViewById(R.id.tvNumber);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
