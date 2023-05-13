@@ -34,19 +34,20 @@
 
 <!--        <activity android:name=".LoginActivity"></activity>-->
         <activity android:name=".AdminActivity"></activity>
-        <activity android:name=".AddSongActivity"></activity>
       
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".PlayingActivity"></activity>
+        <activity android:name=".PlayerActivity"></activity>
 
 <!--        Admin Activity-->
         <activity android:name=".AddUserActivity"></activity>
         <activity android:name=".EditUserActivity"></activity>
-        <activity android:name=".AddSongActivity"></activity>
+<!--        <activity android:name=".AddSongActivity"></activity>-->
         <activity android:name=".SongFormActivity"></activity>
         <activity android:name=".CategoryFormActivity"></activity>
         <activity android:name=".UserFormActivity"></activity>
+
     </application>
 </manifest>

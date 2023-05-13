@@ -40,35 +40,18 @@ public class EditUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
-
         init();
     }
 
-    private void setEvent() {
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Submit");
-            }
-        });
-    }
-
-    private void loadData(){
-        edFirstName.setText(user.getFirst_name());
-        edLastName.setText(user.getLast_name());
-        edEmail.setText(user.getEmail());
-        edPhone.setText(user.getPhone());
-        edPassword.setText(user.getPassword());
-    }
 
     private void init() {
         edFirstName =findViewById(R.id.edFirstName);
-        ed_lastname = findViewById(R.id.ed_lastname);
+        ed_lastname = findViewById(R.id.edLastname);
         edEmail = findViewById(R.id.edEmail);
         edPhone = findViewById(R.id.edPhone);
         edPassword = findViewById(R.id.edPassword);
-        btnSubmit = findViewById(R.id.btnSubmit);
-        tvCancel = findViewById(R.id.tvCancel);
+        btnSubmit = findViewById(R.id.btnEditUserSubmit);
+        tvCancel = findViewById(R.id.btnEditUserCancel);
         loadData();
         setEvent();
     }
@@ -109,9 +92,7 @@ public class EditUserActivity extends AppCompatActivity {
         userApi.update(id, userUpdate).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                System.out.println("------------");
-                System.out.println(response.body());
-                Toast.makeText(EditUserActivity.this, "Thành công", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_SHORT).show();
             }
 
             @Override

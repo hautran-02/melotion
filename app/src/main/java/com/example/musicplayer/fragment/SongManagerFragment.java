@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,9 @@ public class SongManagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_song_manager, container, false);
+
+
+
 
         init();
 
@@ -116,16 +120,17 @@ public class SongManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
-                songApi.deleteSong(id_song).enqueue(new Callback<String>() {
+                songApi.deleteSong(id_song).enqueue(new Callback<SongMessage>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Toast.makeText(getActivity(),response.body(),Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
+                    public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                        String string = response.body().getMessage();
+                        Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                         onResume();
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<SongMessage> call, Throwable t) {
 
                     }
                 });
@@ -139,7 +144,7 @@ public class SongManagerFragment extends Fragment {
                 Song data = songList.get(currentPosition);
               
                 dialog.cancel();
-                Intent intent = new Intent(getActivity(), EditSongActivity.class);
+                Intent intent = new Intent(getActivity(), SongFormActivity.class);
                 intent.putExtra("data", data);
 
                 startActivity(intent);
