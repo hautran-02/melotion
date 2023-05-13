@@ -54,6 +54,27 @@
         <item name="android:background">@drawable/btn_layout</item>
         <item name="android:textColor">@color/pri_yellow</item>
         <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="button_black" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_black_layout</item>
+        <item name="android:textColor">@color/pri_yellow</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="button_outline" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/btn_outline_layout</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="primaryBtn">
@@ -78,7 +99,49 @@
         <item name="height">64dp</item>
     </style>
 
-<!-- Ẩn tiêu đề -->
+    <!--    Form: Begin  -->
+    <style name="layout_row">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="height">64dp</item>
+    </style>
+
+    <style name="layout_row_img">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="height">64dp</item>
+    </style>
+
+    <style name="text_linear">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">75</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ic_linear">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">25</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/bg_primary</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:padding">@dimen/pd_2</item>
+        <item name="android:contentDescription">@string/description</item>
+    </style>
+    <!--    Form: End  -->
+
+
+    <!-- Ẩn tiêu đề -->
     <style name="AppTheme.NoTitleBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -95,4 +158,5 @@
     <style name="btn_bottom">
 
     </style>
+
 </resources>

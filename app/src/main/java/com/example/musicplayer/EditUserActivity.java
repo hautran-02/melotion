@@ -44,6 +44,23 @@ public class EditUserActivity extends AppCompatActivity {
         init();
     }
 
+    private void setEvent() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Submit");
+            }
+        });
+    }
+
+    private void loadData(){
+        edFirstName.setText(user.getFirst_name());
+        edLastName.setText(user.getLast_name());
+        edEmail.setText(user.getEmail());
+        edPhone.setText(user.getPhone());
+        edPassword.setText(user.getPassword());
+    }
+
     private void init() {
         edFirstName =findViewById(R.id.edFirstName);
         ed_lastname = findViewById(R.id.ed_lastname);
@@ -103,5 +120,7 @@ public class EditUserActivity extends AppCompatActivity {
             }
         });
 
+        setEvent();
+        loadData();
     }
 }

@@ -22,6 +22,7 @@ import com.example.musicplayer.AddSongActivity;
 import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.EditUserActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.UserFormActivity;
 import com.example.musicplayer.adapter.SongManagerAdapter;
 import com.example.musicplayer.adapter.UserAdapter;
 import com.example.musicplayer.api.SongApi;
@@ -63,20 +64,12 @@ public class UserManagerFragment extends Fragment  {
     }
 
     private void setEvent() {
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddSongActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void loadData(){
 
         mRecyclerView = view.findViewById(R.id.rcvUserListManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         userList = new ArrayList<>();
         userApi = RetrofitClient.getInstance().getRetrofit().create(UserApi.class);
@@ -112,6 +105,7 @@ public class UserManagerFragment extends Fragment  {
     }
 
     private void init() {
+
         btnAdd = view.findViewById(R.id.btnForwardAddSong);
         loadData();
         setEvent();
@@ -138,6 +132,7 @@ public class UserManagerFragment extends Fragment  {
                 User data = userList.get(currentPosition);
                 Intent intent = new Intent(getActivity(), EditSongActivity.class);
                 intent.putExtra("data", "1");
+
                 Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
 
                 startActivity(intent);
@@ -149,6 +144,5 @@ public class UserManagerFragment extends Fragment  {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 }

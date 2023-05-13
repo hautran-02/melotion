@@ -23,6 +23,7 @@ import com.example.musicplayer.AdminActivity;
 import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.SongFormActivity;
 import com.example.musicplayer.adapter.SongListAdapter;
 import com.example.musicplayer.adapter.SongManagerAdapter;
 import com.example.musicplayer.api.SongApi;
@@ -62,13 +63,6 @@ public class SongManagerFragment extends Fragment {
     }
 
     private void setEvent() {
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddSongActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void loadData(){
@@ -105,8 +99,6 @@ public class SongManagerFragment extends Fragment {
     }
 
     private void init() {
-        btnAdd = view.findViewById(R.id.btnForwardAddSong);
-        System.out.println(btnAdd);
         setEvent();
         loadData();
     }
@@ -145,9 +137,11 @@ public class SongManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Song data = songList.get(currentPosition);
+              
                 dialog.cancel();
                 Intent intent = new Intent(getActivity(), EditSongActivity.class);
                 intent.putExtra("data", data);
+
                 startActivity(intent);
             }
         });

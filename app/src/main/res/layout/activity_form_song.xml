@@ -21,23 +21,9 @@
             android:paddingTop="@dimen/pd_4"
             android:paddingLeft="@dimen/pd_4"
             android:paddingRight="@dimen/pd_4">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tvCancel"
-                    style="@style/h4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/cancel" />
-
-            </LinearLayout>
 
             <TextView
-                android:id="@+id/editUser"
+                android:id="@+id/tvTitleSong"
                 style="@style/h1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -58,55 +44,64 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/edFirstName"
+                    android:id="@+id/edSongName"
                     style="@style/ed_primary"
-                    android:hint="@string/first_name"
-                    android:inputType="text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
-                <EditText
-                    android:id="@+id/edLastname"
-                    style="@style/ed_primary"
-                    android:hint="@string/last_name"
+                    android:hint="@string/song_name"
                     android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <EditText
-                    android:id="@+id/edEmail"
+                    android:id="@+id/edSongAuthor"
                     style="@style/ed_primary"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/song_author"
+                    android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <EditText
-                    android:id="@+id/edPhone"
+                    android:id="@+id/edSongSinger"
                     style="@style/ed_primary"
-                    android:hint="@string/phone"
-                    android:inputType="none"
-                    android:editable="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-                <EditText
-                    android:id="@+id/edPassword"
-                    style="@style/ed_primary"
-                    android:hint="@string/password"
+                    android:hint="@string/song_signer"
                     android:inputType="text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/mg_2"
-                    android:orientation="horizontal">
+                    style="@style/layout_row_img">
+
+                    <TextView
+                        android:id="@+id/tvSongLink"
+                        style="@style/text_linear"
+                        android:text="@string/song_link" />
+
+                    <ImageButton
+                        android:id="@+id/btnUpSongLink"
+                        style="@style/ic_linear"
+                        android:src="@drawable/ic_upload" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_row_img">
+
+                    <TextView
+                        android:id="@+id/tvSongImg"
+                        style="@style/text_linear"
+                        android:text="@string/song_img" />
+
+                    <ImageButton
+                        android:id="@+id/btnUpSongImg"
+                        style="@style/ic_linear"
+                        android:src="@drawable/ic_upload" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_row">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnEditUserCancel"
+                        android:id="@+id/btnSongCancel"
                         style="@style/button_black"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
@@ -114,7 +109,7 @@
                         android:text="@string/cancel" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnEditUserSubmit"
+                        android:id="@+id/btnSongSubmit"
                         style="@style/button"
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
@@ -122,8 +117,6 @@
                         android:text="@string/edit" />
                 </LinearLayout>
             </LinearLayout>
-
-
 
         </LinearLayout>
     </ScrollView>
