@@ -137,11 +137,9 @@ public class SongManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Song data = songList.get(currentPosition);
-              
                 dialog.cancel();
                 Intent intent = new Intent(getActivity(), EditSongActivity.class);
                 intent.putExtra("data", data);
-
                 startActivity(intent);
             }
         });

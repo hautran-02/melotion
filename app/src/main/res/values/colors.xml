@@ -28,4 +28,15 @@
 
     <!--    Color follow bg     -->
     <color name="dark_bg_text">#FFFFFFFF</color>
+
+    <!--    -->
+    <color name="text_color">#355080</color>
+    <color name="background_color">#e4ddd2</color>
+    <color name="highlight">#ffffff</color>
+    <color name="shadow_color">#d9dbde</color>
+    <color name="solid_light_color">#d9dbde</color>
+    <color name="solid_dark_color">#808080</color>
+    <color name="shadowColorLight">#f0e7db</color>
+    <color name="shadowColorDark">#cfc6ba</color>
+
 </resources>
