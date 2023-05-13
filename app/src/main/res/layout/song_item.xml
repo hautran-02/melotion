@@ -47,6 +47,4 @@
         android:layout_marginLeft="242dp"
         android:layout_toRightOf="@id/imgSong"
         android:src="@drawable/ic_play" />
-
-
 </RelativeLayout>
