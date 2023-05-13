@@ -19,9 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.musicplayer.AddSongActivity;
 import com.example.musicplayer.AdminActivity;
-import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.SongFormActivity;
@@ -57,12 +55,7 @@ public class SongManagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_song_manager, container, false);
-
-
-
-
         init();
-
         return view;
     }
 

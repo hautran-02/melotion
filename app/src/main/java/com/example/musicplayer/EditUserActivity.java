@@ -100,7 +100,6 @@ public class EditUserActivity extends AppCompatActivity {
 
             }
         });
-
         setEvent();
         loadData();
     }

@@ -17,14 +17,19 @@ import com.example.musicplayer.MainActivity;
 import com.example.musicplayer.PlayerActivity;
 import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.SharedPrefManager;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.adapter.SongListAdapter;
 import com.example.musicplayer.api.CategoryApi;
+import com.example.musicplayer.api.FavouriteApi;
 import com.example.musicplayer.api.SongApi;
 import com.example.musicplayer.domain.Category;
+import com.example.musicplayer.domain.Favourite;
+import com.example.musicplayer.domain.FavouriteMessage;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.domain.User;
 import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.io.Serializable;
@@ -42,6 +47,12 @@ public class SongListFragment extends Fragment {
 
     private SongApi songApi;
 
+    private FavouriteApi favouriteApi;
+
+    View view;
+
+    static boolean isCategory;
+
     private  Long categoryId;
 
     public SongListFragment() {
@@ -52,35 +63,42 @@ public class SongListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View View = inflater.inflate(R.layout.fragment_song_list, container, false);
+        view = inflater.inflate(R.layout.fragment_song_list, container, false);
 
 //        Get categoryId
+        init();
+        return view;
+    }
+
+    private void init(){
         Bundle bundle = getArguments();
         if(bundle != null){
             categoryId = bundle.getLong("category");
+            if(categoryId != null) {
+                isCategory = true;
+            }
+            else {
+                isCategory = false;
+            }
         }
-        System.out.println(categoryId);
-
+        else
+        {
+            isCategory = false;
+        }
         // Initialize the RecyclerView
-        mRecyclerView = View.findViewById(R.id.rcvSongList);
+        mRecyclerView = view.findViewById(R.id.rcvSongList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         getSong();
-        return View;
     }
-
-    // SongFragment.java
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Get the arguments passed from the CategoryFragment
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            int itemId = bundle.getInt("categoryItem");
-            // Use the itemId to get the data you want
-            // ...
+    private void getSong(){
+        if(isCategory == true) {
+            getSongByCategory();
+        }
+        else {
+            getSongByFavourite();
         }
     }
-
-    private void getSong(){
+    private void getSongByCategory(){
         songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
 
         songApi.SongCategory(categoryId).enqueue(new Callback<SongMessage>() {
@@ -94,13 +112,13 @@ public class SongListFragment extends Fragment {
                 mRecyclerView.setAdapter(mSongAdapter);
                 mRecyclerView.setHasFixedSize(true);
                 mSongAdapter.notifyDataSetChanged();
-                if(songs!=null && !songs.isEmpty()) {
+                if (songs != null && !songs.isEmpty()) {
                     mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             Song data = songs.get(position);
                             Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                            intent.putExtra("position",position);
+                            intent.putExtra("position", position);
                             intent.putExtra("songs", (Serializable) songs);
                             System.out.println("-----------------");
                             System.out.println(data);
@@ -110,10 +128,56 @@ public class SongListFragment extends Fragment {
                     });
                 }
             }
+
             @Override
             public void onFailure(Call<SongMessage> call, Throwable t) {
                 System.out.println(t);
             }
         });
+    }
+    private void getSongByFavourite(){
+        User user = SharedPrefManager.getInstance(getContext()).getUser();
+        favouriteApi =  RetrofitClient.getInstance().getRetrofit().create(FavouriteApi.class);
+
+        favouriteApi.listByUser(user.getId()).enqueue(new Callback<FavouriteMessage>() {
+            @Override
+            public void onResponse(Call<FavouriteMessage> call, Response<FavouriteMessage> response) {
+                FavouriteMessage favouriteMessage = response.body();
+                List<Song> songs = new ArrayList<>();
+                for(Favourite favourite: favouriteMessage.getFavourites()) {
+                    songs.add(favourite.getSong());
+                }
+                mSongAdapter = new SongListAdapter(songs);
+                mRecyclerView.setAdapter(mSongAdapter);
+                mRecyclerView.setHasFixedSize(true);
+                mSongAdapter.notifyDataSetChanged();
+                if (songs != null && !songs.isEmpty()) {
+                    mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Song data = songs.get(position);
+                            Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                            intent.putExtra("position", position);
+                            intent.putExtra("songs", (Serializable) songs);
+                            System.out.println("-----------------");
+                            System.out.println(data);
+                            //intent.putExtra("songList", new ArrayList<>(songList));
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FavouriteMessage> call, Throwable t) {
+
+            }
+        });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        init();
+        // Perform any necessary updates here
     }
 }

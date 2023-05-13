@@ -72,7 +72,7 @@
                         android:layout_weight="60"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/pd_1"
-                        android:paddingBottm="@dimen/pd_1"
+                        android:paddingBottom="@dimen/pd_1"
                         android:layout_marginLeft="@dimen/mg_1"
                         android:orientation="vertical">
 
