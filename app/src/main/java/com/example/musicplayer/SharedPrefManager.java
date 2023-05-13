@@ -14,6 +14,8 @@ public class SharedPrefManager {
     private static final String KEY_LASTNAME = "keylastname";
     private static final String KEY_EMAIL = "keyemail";
 
+    private static final String KEY_ROLE = "keyrole";
+
     private static SharedPrefManager mInstance;
     private static Context ctx;
 
@@ -38,7 +40,7 @@ public class SharedPrefManager {
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_FIRSTNAME, user.getFirst_name());
         editor.putString(KEY_LASTNAME, user.getLast_name());
-
+        editor.putString(KEY_ROLE, user.getRole());
         editor.apply();
     }
     public boolean isLoggedIn () {

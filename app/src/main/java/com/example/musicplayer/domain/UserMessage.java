@@ -6,7 +6,7 @@ public class UserMessage {
     @SerializedName("message")
     private String message;
 
-    @SerializedName("user")
+    @SerializedName("userDTO")
     private User user ;
 
     public UserMessage(String message, User user) {
