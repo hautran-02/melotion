@@ -20,6 +20,8 @@
     <string name="song_author">Người sáng tác</string>
     <string name="song_link">Chưa có bài hát</string>
     <string name="song_img">Chọn avatar</string>
+    <string name="choose_img">Chọn avatar</string>
+    <string name="choose_link">Chọn bài hát</string>
     <string name="upload">Tải lên</string>
     <string name="add">Thêm vào</string>
     <string name="cancel">Hủy bỏ</string>
@@ -32,11 +34,16 @@
     <string name="full_name">Họ và tên</string>
     <string name="phone">Số điện thoại</string>
     <string name="edit_user">Chỉnh sửa người dùng</string>
+    <string name="add_user">Thêm người dùng</string>
     <string name="first_name">Tên</string>
     <string name="last_name">Họ</string>
     <string name="email">Email</string>
     <string name="password">Mật khẩu</string>
     <string name="category_list">Danh sách danh mục</string>
     <string name="list">Danh sách</string>
+    <string name="edit_category">Chỉnh sửa danh mục</string>
+    <string name="add_category">Thêm danh mục</string>
+    <string name="category_name">Tên danh mục</string>
+    <string name="description">Mô tả</string>
 
 </resources>

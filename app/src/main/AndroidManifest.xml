@@ -37,8 +37,10 @@
 <!--        Admin Activity-->
         <activity android:name=".AddUserActivity"></activity>
         <activity android:name=".EditUserActivity"></activity>
-        <activity android:name=".AddCategoryActivity"></activity>
         <activity android:name=".AddSongActivity"></activity>
+        <activity android:name=".SongFormActivity"></activity>
+        <activity android:name=".CategoryFormActivity"></activity>
+        <activity android:name=".UserFormActivity"></activity>
 
     </application>
 </manifest>

@@ -22,6 +22,7 @@ import com.example.musicplayer.AddSongActivity;
 import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.EditUserActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.UserFormActivity;
 import com.example.musicplayer.adapter.SongManagerAdapter;
 import com.example.musicplayer.adapter.UserAdapter;
 import com.example.musicplayer.domain.OnItemClickListener;
@@ -107,7 +108,7 @@ public class UserManagerFragment extends Fragment  {
             @Override
             public void onClick(View view) {
                 User data = userList.get(currentPosition);
-                Intent intent = new Intent(getActivity(), EditUserActivity.class);
+                Intent intent = new Intent(getActivity(), UserFormActivity.class);
                 intent.putExtra("data", data);
                 Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
 
@@ -120,6 +121,5 @@ public class UserManagerFragment extends Fragment  {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 }

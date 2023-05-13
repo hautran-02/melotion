@@ -127,11 +127,11 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(currentFragment instanceof SongManagerFragment){
-                    intent = new Intent(AdminActivity.this, AddSongActivity.class);
+                    intent = new Intent(AdminActivity.this, SongFormActivity.class);
                 } else if (currentFragment instanceof CategoryManagerFragment) {
-                    intent = new Intent(AdminActivity.this, AddCategoryActivity.class);
+                    intent = new Intent(AdminActivity.this, CategoryFormActivity.class);
                 } else if (currentFragment instanceof UserManagerFragment) {
-                    intent = new Intent(AdminActivity.this, AddUserActivity.class);
+                    intent = new Intent(AdminActivity.this, UserFormActivity.class);
                 }
                 startActivity(intent);
             }

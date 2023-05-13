@@ -8,7 +8,8 @@ public class Category implements Serializable {
     private String image;
     private String description;
 
-    public Category(String name, String image, String description) {
+    public Category(long id, String name, String image, String description) {
+        this.id = id;
         this.name = name;
         this.image = image;
         this.description = description;

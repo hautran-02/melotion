@@ -23,6 +23,7 @@ import com.example.musicplayer.AdminActivity;
 import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.PlayingActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.SongFormActivity;
 import com.example.musicplayer.adapter.SongListAdapter;
 import com.example.musicplayer.adapter.SongManagerAdapter;
 import com.example.musicplayer.domain.OnItemClickListener;
@@ -110,7 +111,7 @@ public class SongManagerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Song data = songList.get(currentPosition);
-                Intent intent = new Intent(getActivity(), EditSongActivity.class);
+                Intent intent = new Intent(getActivity(), SongFormActivity.class);
                 intent.putExtra("data", "1");
                 Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
 
