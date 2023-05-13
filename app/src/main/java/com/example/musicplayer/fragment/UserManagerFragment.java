@@ -18,9 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.musicplayer.AddSongActivity;
-import com.example.musicplayer.EditSongActivity;
 import com.example.musicplayer.EditUserActivity;
+import com.example.musicplayer.LoginActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.UserFormActivity;
 import com.example.musicplayer.adapter.SongManagerAdapter;
@@ -83,10 +82,7 @@ public class UserManagerFragment extends Fragment  {
                     @Override
                     public void onItemClick(int position) {
                         User data = userList.get(position);
-
-                        Intent intent = new Intent(getActivity(), EditUserActivity.class);
-                        intent.putExtra("data", data);
-                        startActivity(intent);
+                        showDialog(data);
                     }
                 });
             }
@@ -106,12 +102,12 @@ public class UserManagerFragment extends Fragment  {
 
     private void init() {
 
-        btnAdd = view.findViewById(R.id.btnForwardAddSong);
+//        btnAdd = view.findViewById(R.id.bt);
         loadData();
         setEvent();
     }
 
-    private void showDialog() {
+    private void showDialog(User data) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet);
@@ -122,19 +118,31 @@ public class UserManagerFragment extends Fragment  {
         deteteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "click Delete", Toast.LENGTH_SHORT).show();
+                userApi = RetrofitClient.getInstance().getRetrofit().create(UserApi.class);
+                userApi.deleteUser(data.getId()).enqueue(new Callback<UserMessage>() {
+                    @Override
+                    public void onResponse(Call<UserMessage> call, Response<UserMessage> response) {
+                        String string= response.body().getMessage();
+                        Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        onResume();
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserMessage> call, Throwable t) {
+
+                    }
+                });
+                dialog.dismiss();
+                onResume();
             }
         });
 
         editLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User data = userList.get(currentPosition);
-                Intent intent = new Intent(getActivity(), EditSongActivity.class);
-                intent.putExtra("data", "1");
-
-                Toast.makeText(getActivity(), "click Edit", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getActivity(), EditUserActivity.class);
+                intent.putExtra("data", data);
                 startActivity(intent);
             }
         });
@@ -144,5 +152,11 @@ public class UserManagerFragment extends Fragment  {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        init();
+        // Perform any necessary updates here
     }
 }

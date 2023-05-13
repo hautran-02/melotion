@@ -60,7 +60,14 @@
                 style="@style/bg_primary"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="310dp"
+                android:layout_marginTop="90dp"
+                android:src="@drawable/rangkhon"
+                app:civ_border_color="#595959"
+                app:civ_border_overlay="true"
+                app:civ_border_width="50dp"
+                android:foreground="@drawable/circle_small"
+                android:foregroundGravity="center" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgDisc"

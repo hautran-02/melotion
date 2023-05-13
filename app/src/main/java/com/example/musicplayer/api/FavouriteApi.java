@@ -17,6 +17,10 @@ public interface FavouriteApi {
     @POST("favourite/find")
     Call<FavouriteMessage> findFavorite(@Field("songId") Long songId, @Field("userId") Long userId);
 
+    @FormUrlEncoded
+    @POST("favourite/listByUser")
+    Call<FavouriteMessage> listByUser(@Field("userId") Long userId);
+
 
     @FormUrlEncoded
     @POST("favourite/add")

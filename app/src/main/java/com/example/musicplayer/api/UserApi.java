@@ -28,4 +28,8 @@ public interface UserApi {
 
     @PUT("user/update/{id}")
     Call<User> update(@Path("id") long id, @Body User user);
+
+    @FormUrlEncoded
+    @POST("user/delete")
+    Call<UserMessage> deleteUser(@Field("id") Long id);
 }

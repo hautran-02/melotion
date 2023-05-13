@@ -10,12 +10,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.musicplayer.RealPathUtil.RealPathUtil;
+import com.example.musicplayer.api.CategoryApi;
+import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.api.UserApi;
 import com.example.musicplayer.domain.Category;
+import com.example.musicplayer.domain.CategoryMessage;
+import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoryFormActivity extends AppCompatActivity {
     ImageButton  btnChooseImg;
@@ -29,21 +43,25 @@ public class CategoryFormActivity extends AppCompatActivity {
     private static final int PICK_MP3_REQUEST = 2;
     private Uri mImageUri, mSongUri;
 
+    File fileImage, fileMp3;
+    CategoryApi categoryApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_category);
-
         init();
     }
 
     private void setEvent() {
-        btnChooseImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseImage();
-            }
-        });
+        if (isEditForm == false){
+            btnChooseImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    chooseImage();
+                }
+            });
+        }
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +107,9 @@ public class CategoryFormActivity extends AppCompatActivity {
         Intent intent = getIntent();
         data = (Category) intent.getSerializableExtra("data");
 
-        setEvent();
+
         loadData();
+        setEvent();
     }
 
     //Upload Image
@@ -101,29 +120,16 @@ public class CategoryFormActivity extends AppCompatActivity {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mImageUri = data.getData();
-
-            // Create a File object from the Uri
-            File file = new File(getRealPathFromURI(mImageUri));
-
-            System.out.println(file);
+            String IMAGE_PATH= RealPathUtil.getRealPath(this,mImageUri);
+            fileImage = new File(IMAGE_PATH);
+            tvImg.setText(fileImage.getName());
         } else if (requestCode == PICK_MP3_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             mSongUri = data.getData();
+            String IMAGE_PATH= RealPathUtil.getRealPath(this,mSongUri);
             // Handle the selected MP3 file here
-
-            File file = new File(getRealPathFromURI(mSongUri));
-            System.out.println(mSongUri);
+            fileMp3 = new File(IMAGE_PATH);
+            //tvSongLink.setText(fileMp3.getName());
         }
-    }
-
-    // This method is used to get the real path of a Uri
-    public String getRealPathFromURI(Uri contentUri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String filePath = cursor.getString(column_index);
-        cursor.close();
-        return filePath;
     }
 
     private void chooseImage() {
@@ -133,13 +139,8 @@ public class CategoryFormActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    private void chooseSong() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("audio/mpeg");
-        startActivityForResult(intent, PICK_MP3_REQUEST);
-    }
-
     private void submit(){
+        obj = new Category();
         obj.setName(String.valueOf(edName.getText()));
         obj.setDescription(String.valueOf(edDescription.getText()));
         obj.setImage(String.valueOf(tvImg.getText()));
@@ -152,10 +153,54 @@ public class CategoryFormActivity extends AppCompatActivity {
     }
 
     private void add(){
+        //file image
+        RequestBody requestFileImage=RequestBody.create(MediaType.parse("multipart/form-data"), fileImage);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("image", fileImage.getName(), requestFileImage);
+        //text
+        String name = edName.getText().toString();
+        RequestBody requestName = RequestBody.create(MediaType.parse("text/plain"), name);
+
+        String description = edDescription.getText().toString();
+        RequestBody requestDescription = RequestBody.create(MediaType.parse("text/plain"), description);
+
+        categoryApi = RetrofitClient.getRetrofit().create(CategoryApi.class);
+        categoryApi.createCategory(requestName, image, requestDescription).enqueue(new Callback<CategoryMessage>() {
+            @Override
+            public void onResponse(Call<CategoryMessage> call, Response<CategoryMessage> response) {
+                CategoryMessage categoryMessage = response.body();
+                Toast.makeText(CategoryFormActivity.this, categoryMessage.getMessage(), Toast.LENGTH_SHORT).show();
+                onResume();
+                init();
+            }
+
+            @Override
+            public void onFailure(Call<CategoryMessage> call, Throwable t) {
+
+            }
+        });
 
     }
 
     private void edit(){
+        categoryApi= RetrofitClient.getInstance().getRetrofit().create(CategoryApi.class);
+        Category categoryUpdate = data;
+        categoryUpdate.setName(edName.getText().toString());
+        categoryUpdate.setDescription(edDescription.getText().toString());
 
+        Long id = categoryUpdate.getId();
+
+        categoryApi.update(id, categoryUpdate).enqueue(new Callback<CategoryMessage>() {
+            @Override
+            public void onResponse(Call<CategoryMessage> call, Response<CategoryMessage> response) {
+                CategoryMessage categoryMessage = response.body();
+                Toast.makeText(getApplicationContext(), categoryMessage.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<CategoryMessage> call, Throwable t) {
+            }
+        });
+        setEvent();
+        loadData();
     }
 }

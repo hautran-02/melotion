@@ -1,11 +1,17 @@
 package com.example.musicplayer.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Category implements Serializable {
+    @SerializedName("id")
     private long id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("image")
     private String image;
+    @SerializedName("description")
     private String description;
 
     public Category(long id, String name, String image, String description) {
@@ -13,6 +19,8 @@ public class Category implements Serializable {
         this.name = name;
         this.image = image;
         this.description = description;
+    }
+    public Category() {
     }
 
     public long getId() {
