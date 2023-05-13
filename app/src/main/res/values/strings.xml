@@ -4,6 +4,7 @@
     <string name="txt_search">Tìm kiếm</string>
     <string name="float_layout">Đang phát</string>
     <string name="back">Trở về</string>
+    <string name="header_btn">Nút header</string>
     <string name="page_title">Music Player</string>
     <string name="topbar_player">Tên bài hát</string>
     <string name="disc">Đĩa nhạc</string>
@@ -52,6 +53,5 @@
     <string name="profile_name">Tên người dùng</string>
     <string name="profile_phone">SĐT người dùng</string>
     <string name="profile_email">Email người dùng</string>
-
 
 </resources>
