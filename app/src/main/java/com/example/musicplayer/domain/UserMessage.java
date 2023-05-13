@@ -2,6 +2,8 @@ package com.example.musicplayer.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class UserMessage {
     @SerializedName("message")
     private String message;
@@ -9,9 +11,13 @@ public class UserMessage {
     @SerializedName("userDTO")
     private User user ;
 
-    public UserMessage(String message, User user) {
+    @SerializedName("userDTOS")
+    private List<User> users ;
+
+    public UserMessage(String message, User user, List<User> users) {
         this.message = message;
         this.user = user;
+        this.users = users;
     }
 
     public String getMessage() {
@@ -28,5 +34,13 @@ public class UserMessage {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

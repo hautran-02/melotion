@@ -1,5 +1,7 @@
 package com.example.musicplayer.api;
 
+import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.domain.SongUpdate;
 import com.example.musicplayer.domain.User;
 import com.example.musicplayer.domain.UserMessage;
 
@@ -8,6 +10,8 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface UserApi {
     @FormUrlEncoded
@@ -17,4 +21,11 @@ public interface UserApi {
 
     @POST("user/register")
     Call<UserMessage> register(@Body User user);
+
+
+    @POST(value = "user/all")
+    Call<UserMessage> getAllUser();
+
+    @PUT("user/update/{id}")
+    Call<User> update(@Path("id") long id, @Body User user);
 }
