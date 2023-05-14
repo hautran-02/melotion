@@ -20,6 +20,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import com.example.musicplayer.SQLite.DatabaseHelper;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.api.FavouriteApi;
 import com.example.musicplayer.api.SongApi;
@@ -184,8 +186,14 @@ public class PlayerActivity extends AppCompatActivity {
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
     }
-
     private void playMusic(Song song){
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        dbHelper.addData(song.getId());
+        List<Long> longs= dbHelper.getAllData();
+        System.out.println("-----------");
+        for(Long t:longs) {
+            System.out.println(t);
+        }
         favourite = false;
         setFavourite(song);
         tvSongNamePlayer.setText(song.getName()+"("+song.getSinger()+"-"+song.getAuthor()+")");
