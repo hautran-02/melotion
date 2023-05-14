@@ -30,7 +30,14 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         init();
-        setEvent();
+        if(edFirstName.getText().toString().isEmpty() || edLastName.getText().toString().isEmpty() ||
+                edEmail.getText().toString().isEmpty() ||edPassword.getText().toString().isEmpty() ||
+                edPhone.getText().toString().isEmpty() || edConfirmPassword.getText().toString().isEmpty())
+        {
+            Toast.makeText(RegisterActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        }else {
+            setEvent();
+        }
     }
 
     private void setEvent() {

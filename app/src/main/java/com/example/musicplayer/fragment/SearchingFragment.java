@@ -1,5 +1,6 @@
 package com.example.musicplayer.fragment;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,13 +14,28 @@ import android.widget.TextView;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.musicplayer.PlayerActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.domain.Song;
+import com.example.musicplayer.domain.SongMessage;
+import com.example.musicplayer.retrofit.RetrofitClient;
+
+import java.io.Serializable;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchingFragment extends Fragment {
     View view;
     EditText edSearching;
-    ImageButton ibBack;
+
+    private SongApi songApi;
+    ImageButton ibBack, ibSearch;
     TextView tv;
     FragmentManager fragmentManager;
     public SearchingFragment() {
@@ -41,6 +57,7 @@ public class SearchingFragment extends Fragment {
         edSearching = view.findViewById(R.id.edSearching);
         ibBack = view.findViewById(R.id.ibBackSearching);
         tv = view.findViewById(R.id.tvFirstSong);
+        ibSearch= view.findViewById(R.id.ibSearch);
     }
 
     private void setEvent(){
@@ -62,14 +79,50 @@ public class SearchingFragment extends Fragment {
         ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                SearchFragment searchFragment = new SearchFragment();
+                fragmentManager.beginTransaction().replace(R.id.container, searchFragment).commit();
             }
         });
 
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            }
+        });
+
+        ibSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String stringSong = edSearching.getText().toString();
+
+                songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+                songApi.GetByName(stringSong).enqueue(new Callback<SongMessage>() {
+                    @Override
+                    public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+
+                        SongMessage songMessage = response.body();
+                        List<Song> songList = songMessage.getSongs();
+                        // Start a new fragment transaction
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        // Replace the current fragment with a new fragment
+                        Fragment searchFragment = new SearchFragment();
+                        Bundle args = new Bundle();
+                        System.out.println("--------"+songList);
+                        args.putSerializable("songs", (Serializable) songList);
+                        searchFragment.setArguments(args);
+
+                        transaction.replace(R.id.container, searchFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+
+                    @Override
+                    public void onFailure(Call<SongMessage> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }

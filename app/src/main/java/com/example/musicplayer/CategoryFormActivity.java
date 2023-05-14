@@ -66,7 +66,13 @@ public class CategoryFormActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submit();
+                if(edName.getText().toString().isEmpty() || edDescription.getText().toString().isEmpty() ||
+                        tvImg.getText().toString().equals("Chọn avatar") )
+                {
+                    Toast.makeText(CategoryFormActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    submit();
+                }
             }
         });
 

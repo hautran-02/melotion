@@ -30,6 +30,10 @@ public interface SongApi {
     @POST("song/GetListId")
     Call<SongMessage> GetById(@Field("ids") List<Long> ids);
 
+    @FormUrlEncoded
+    @POST("song/GetByName")
+    Call<SongMessage> GetByName(@Field("name") String name);
+
 
     @FormUrlEncoded
     @POST("song/delete")

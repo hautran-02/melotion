@@ -65,8 +65,6 @@ public class SongFormActivity extends AppCompatActivity {
 
     private void setEvent() {
         if(isEditForm == false) {
-
-
             btnChooseImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,7 +83,14 @@ public class SongFormActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submit();
+                if(edName.getText().toString().isEmpty() || edAuthor.getText().toString().isEmpty() ||
+                        edSinger.getText().toString().isEmpty() ||tvSongLink.getText().toString().equals("Chưa có bài hát")||
+                        tvSongImg.getText().toString().equals("Chọn avatar"))
+                {
+                    Toast.makeText(SongFormActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    submit();
+                }
             }
         });
 
