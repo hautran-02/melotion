@@ -117,11 +117,18 @@ public class HomeFragment extends Fragment {
                     lastestCategoryRecyclerView.setAdapter(mSongAdapter);
                     lastestCategoryRecyclerView.setHasFixedSize(true);
                     mSongAdapter.notifyDataSetChanged();
-                    mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                        }
-                    });
+                    if (songs != null && !songs.isEmpty()) {
+                        mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Song data = songs.get(position);
+                                Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                                intent.putExtra("position", position);
+                                intent.putExtra("songs", (Serializable) songs);
+                                startActivity(intent);
+                            }
+                        });
+                    }
                 }
 
             }

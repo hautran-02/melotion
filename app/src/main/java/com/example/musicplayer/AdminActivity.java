@@ -19,6 +19,7 @@ import com.example.musicplayer.fragment.CategoryManagerFragment;
 import com.example.musicplayer.fragment.HomeFragment;
 import com.example.musicplayer.fragment.SettingFragment;
 import com.example.musicplayer.fragment.SongManagerFragment;
+import com.example.musicplayer.fragment.UserFragment;
 import com.example.musicplayer.fragment.UserManagerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -66,7 +67,10 @@ public class AdminActivity extends AppCompatActivity {
             title = getResources().getString(R.string.category_list);
         } else if (currentFragment instanceof UserManagerFragment) {
             title = getResources().getString(R.string.user_list);
+        }else if (currentFragment instanceof UserFragment){
+            title =getResources().getString(R.string.user);
         }
+
         tvTitle.setText(title.trim());
     }
 
@@ -112,6 +116,9 @@ public class AdminActivity extends AppCompatActivity {
                             case R.id.navigation_user_maneger:
                                 forwardFragment(new UserManagerFragment(), "UserManagerFragment");
                                 return true;
+                            case R.id.navigation_user:
+                                forwardFragment(new UserFragment(), "UserFragment");
+                                return true;
                         }
                         return false;
                     }
@@ -130,29 +137,30 @@ public class AdminActivity extends AppCompatActivity {
                     intent = new Intent(AdminActivity.this, SongFormActivity.class);
                 } else if (currentFragment instanceof CategoryManagerFragment) {
                     intent = new Intent(AdminActivity.this, CategoryFormActivity.class);
-                } else if (currentFragment instanceof UserManagerFragment) {
-                    intent = new Intent(AdminActivity.this, UserFormActivity.class);
                 }
+//                else if (currentFragment instanceof UserManagerFragment) {
+//                    intent = new Intent(AdminActivity.this, UserFormActivity.class);
+//                }
                 startActivity(intent);
             }
         });
 
 //        Set event cho nút Back
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                forwardFragment(previousFragment, previousFragment.getTag());
-
-//                Tạo hiệu ứng seleted.
-                if(currentFragment instanceof SongManagerFragment){
-                    menuItemSong.setChecked(true);
-                } else if (currentFragment instanceof CategoryManagerFragment) {
-                    menuItemCategory.setChecked(true);
-                } else if (currentFragment instanceof UserManagerFragment) {
-                    menuItemUser.setChecked(true);
-                }
-            }
-        });
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                forwardFragment(previousFragment, previousFragment.getTag());
+//
+////                Tạo hiệu ứng seleted.
+//                if(currentFragment instanceof SongManagerFragment){
+//                    menuItemSong.setChecked(true);
+//                } else if (currentFragment instanceof CategoryManagerFragment) {
+//                    menuItemCategory.setChecked(true);
+//                } else if (currentFragment instanceof UserManagerFragment) {
+//                    menuItemUser.setChecked(true);
+//                }
+//            }
+//        });
     }
 
 }

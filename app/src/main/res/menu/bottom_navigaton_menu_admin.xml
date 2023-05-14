@@ -16,4 +16,8 @@
         android:id="@+id/navigation_user_maneger"
         android:icon="@drawable/ic_user_maneger"
         android:title="@string/user_manager" />
+    <item
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/ic_user"
+        android:title="Cá nhân" />
 </menu>
