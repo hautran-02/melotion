@@ -67,10 +67,16 @@
                         style="@style/text_linear"
                         android:text="@string/song_img" />
 
-                    <ImageButton
-                        android:id="@+id/btnUpCategoryImg"
-                        style="@style/ic_linear"
-                        android:src="@drawable/ic_upload" />
+                    <soup.neumorphism.NeumorphCardView
+                        style="@style/bg_primary"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/btnFavorite"
+                            style="@style/header_btn_inner"
+                            android:src="@drawable/ic_favorite_white" />
+                    </soup.neumorphism.NeumorphCardView>
 
                 </LinearLayout>
 

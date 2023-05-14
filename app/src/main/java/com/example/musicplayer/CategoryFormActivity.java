@@ -102,7 +102,7 @@ public class CategoryFormActivity extends AppCompatActivity {
     }
 
     private void init(){
-        btnChooseImg = findViewById(R.id.btnUpCategoryImg);
+        btnChooseImg = findViewById(R.id.btnChooseImage);
         btnSubmit = findViewById(R.id.btnCategorySubmit);
         btnCancel = findViewById(R.id.btnCategoryCancel);
         edName = findViewById(R.id.edCategoryName);
