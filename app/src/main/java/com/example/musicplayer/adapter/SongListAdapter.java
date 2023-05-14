@@ -63,7 +63,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.SongVi
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgSong);
             mSongName = itemView.findViewById(R.id.tvSongName);
-            mArtistTextView = itemView.findViewById(R.id.tvArtist);
+            mArtistTextView = itemView.findViewById(R.id.tvSinger);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

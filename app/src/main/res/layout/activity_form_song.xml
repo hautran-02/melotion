@@ -73,6 +73,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/style_spinner"
+                    android:contentDescription="@string/profile_name"
                     android:ems="10" />
                 <LinearLayout
                     style="@style/layout_row_img">

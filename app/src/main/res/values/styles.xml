@@ -182,6 +182,10 @@
         <item name="neumorph_backgroundColor">@color/bg_layout</item>
     </style>
 
+    <style name="bg_primary_pressed" parent="@style/bg_primary">
+        <item name="neumorph_shapeType">pressed</item>
+    </style>
+
 
     <style name="bg_primary_cicle" parent="@style/bg_primary">
         <item name="android:padding">@dimen/pd_3</item>
@@ -245,6 +249,12 @@
         <item name="android:singleLine">true</item>
         <item name="android:text">@string/topbar_player</item>
         <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="text_item" parent="@style/h2_2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/text</item>
     </style>
 
     <style name="header_btn_inner" parent="@style/bg_primary">

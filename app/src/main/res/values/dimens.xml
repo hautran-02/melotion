@@ -21,5 +21,7 @@
     <dimen name="btn_stroke">2dp</dimen>
     <dimen name="btn_player">32dp</dimen>
     <dimen name="ed_width">320dp</dimen>
+    <dimen name="title_big">64dp</dimen>
 
+    <dimen name="bar_height">72dp</dimen>
 </resources>

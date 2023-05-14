@@ -19,6 +19,8 @@
     <color name="btn_black">#383938</color>
     <color name="btn_black_pressed">#676867</color>
 
+    <color name="text">#808080</color>
+
     <!-- Color for properties -->
     <color name="bg_layout">#e4ddd2</color>
     <color name="stroke">#808080</color>

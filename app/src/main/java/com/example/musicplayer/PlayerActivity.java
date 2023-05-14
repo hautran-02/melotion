@@ -31,6 +31,7 @@ import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
 import com.example.musicplayer.domain.User;
 import com.example.musicplayer.retrofit.RetrofitClient;
+import com.example.musicplayer.utilities.Utility;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class PlayerActivity extends AppCompatActivity {
     static Boolean favourite;
     List<Song> songs;
     FavouriteApi favouriteApi;
+    private Boolean isShuffle, isRepeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,10 +191,6 @@ public class PlayerActivity extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(this);
         dbHelper.addData(song.getId());
         List<Long> longs= dbHelper.getAllData();
-        System.out.println("-----------");
-        for(Long t:longs) {
-            System.out.println(t);
-        }
         favourite = false;
         setFavourite(song);
         tvSongNamePlayer.setText(song.getName());
@@ -209,6 +207,30 @@ public class PlayerActivity extends AppCompatActivity {
         imgNext.setOnClickListener(view -> playNextSong(songs));
         favorite.setOnClickListener(view -> favoriteSong(song));
         btnBack.setOnClickListener(view -> finish());
+
+        btnShuffle.setOnClickListener(view -> onShuffle());
+        btnShuffle.setOnClickListener(view -> onRepeat());
+
+    }
+
+    private void onShuffle() {
+        if(!isShuffle){
+            isShuffle = true;
+            isRepeat = false;
+        }
+        else {
+            isShuffle = false;
+        }
+    }
+
+    private void onRepeat() {
+        if(!isRepeat){
+            isRepeat = true;
+            isShuffle = false;
+        }
+        else {
+            isRepeat = false;
+        }
     }
     private void init(){
         imgDisc = findViewById(R.id.imgDisc);
@@ -225,6 +247,15 @@ public class PlayerActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         tvSongSinger = findViewById(R.id.tvSongSinger);
         tvHeaderTitle = findViewById(R.id.tvHeaderTitle);
+
+        Utility.setScrollText(tvSongSinger);
+        Utility.setScrollText(tvHeaderTitle);
+        Utility.setScrollText(tvSongNamePlayer);
+        Utility.setScrollText(tvTime);
+        Utility.setScrollText(tvTotalTime);
+
+        isShuffle = false;
+        isRepeat = false;
     }
 
     class PlayMp3 extends AsyncTask<String, Void, String>{
@@ -251,9 +282,13 @@ public class PlayerActivity extends AppCompatActivity {
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
-                    seekBar.setProgress(0);
-                    mediaPlayer.seekTo(0);
-                    mediaPlayer.start();
+                    if(isRepeat) {
+                        seekBar.setProgress(0);
+                        mediaPlayer.seekTo(0);
+                        mediaPlayer.start();
+                    } else if (isShuffle) {
+                        playNextSong(songs);
+                    }
                 }
             });
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

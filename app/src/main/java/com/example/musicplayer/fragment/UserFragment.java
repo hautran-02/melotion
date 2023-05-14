@@ -18,6 +18,7 @@ import com.example.musicplayer.LoginActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.SharedPrefManager;
 import com.example.musicplayer.domain.User;
+import com.example.musicplayer.utilities.Utility;
 
 public class UserFragment extends Fragment {
     View view;
@@ -79,7 +80,9 @@ public class UserFragment extends Fragment {
         tvProfilePhone= view.findViewById(R.id.tvProfilePhone);
         tvProfileEmail= view.findViewById(R.id.tvProfileEmail);
 
-        System.out.println(user.getFirst_name());
+        Utility.setScrollText(tvProfileName);
+        Utility.setScrollText(tvProfilePhone);
+        Utility.setScrollText(tvProfileEmail);
 
         tvProfileName.setText(user.getFirst_name() +" " + user.getLast_name());
         tvProfilePhone.setText(user.getPhone());

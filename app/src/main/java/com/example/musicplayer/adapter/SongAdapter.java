@@ -47,7 +47,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         TextView songTitle = view.findViewById(R.id.tvSongName);
         songTitle.setText(song.getName());
 
-        TextView artistName = view.findViewById(R.id.tvArtist);
+        TextView artistName = view.findViewById(R.id.tvSinger);
         artistName.setText(song.getSinger());
 
         return view;
