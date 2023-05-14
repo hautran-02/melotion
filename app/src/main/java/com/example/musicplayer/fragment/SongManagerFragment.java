@@ -26,6 +26,7 @@ import com.example.musicplayer.SongFormActivity;
 import com.example.musicplayer.adapter.SongListAdapter;
 import com.example.musicplayer.adapter.SongManagerAdapter;
 import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.asset.LoadingDialog;
 import com.example.musicplayer.domain.OnItemClickListener;
 import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
@@ -109,22 +110,27 @@ public class SongManagerFragment extends Fragment {
         LinearLayout deteteLayout = dialog.findViewById(R.id.layout_delete);
         LinearLayout editLayout = dialog.findViewById(R.id.layout_edit);
 
+
         deteteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+                LoadingDialog loadingDialog = new LoadingDialog(getActivity());
+                loadingDialog.show();
                 songApi.deleteSong(id_song).enqueue(new Callback<SongMessage>() {
+
                     @Override
                     public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
                         String string = response.body().getMessage();
                         Toast.makeText(getActivity(),string,Toast.LENGTH_SHORT).show();
+                        loadingDialog.cancel();
                         dialog.dismiss();
                         onResume();
                     }
 
                     @Override
                     public void onFailure(Call<SongMessage> call, Throwable t) {
-
+                        loadingDialog.cancel();
                     }
                 });
 
