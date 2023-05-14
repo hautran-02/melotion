@@ -44,9 +44,8 @@ public class PlayerActivity extends AppCompatActivity {
     TextView tvSongNamePlayer, tvTotalTime, tvTime;
     CircleImageView imgDisc;
     SeekBar seekBar;
-    ImageView imgPre, imgPlay, imgNext, favorite;
+    ImageView imgPre, imgPlay, imgNext, favorite, btnShuffle, btnRepeat, btnBack;
     ObjectAnimator objectAnimator;
-
     MediaPlayer mediaPlayer;
 
     private SongApi songApi;
@@ -200,18 +199,20 @@ public class PlayerActivity extends AppCompatActivity {
         imgPre.setOnClickListener(view -> playPreSong(songs));
         imgNext.setOnClickListener(view -> playNextSong(songs));
         favorite.setOnClickListener(view -> favoriteSong(song));
+        btnBack.setOnClickListener(view -> finish());
     }
     private void init(){
         imgDisc = findViewById(R.id.imgDisc);
         tvTotalTime = findViewById(R.id.tvTotalTime);
         seekBar = findViewById(R.id.seekBar);
-        imgPre = findViewById(R.id.imgPre);
-        imgPlay= findViewById(R.id.imgPlay);
-        imgNext= findViewById(R.id.imgNext);
+        imgPre = findViewById(R.id.btnPre);
+        imgPlay= findViewById(R.id.btnPlay);
+        imgNext= findViewById(R.id.btnNext);
         tvTime = findViewById(R.id.tvTime);
-        tvSongNamePlayer = findViewById(R.id.tvSongNamePlayer);
-        favorite = findViewById(R.id.favorite);
-
+        tvSongNamePlayer = findViewById(R.id.tvSongName);
+        favorite = findViewById(R.id.btnFavorite);
+        btnShuffle = findViewById(R.id.btnSuffle);
+        btnRepeat = findViewById(R.id.btnRepeat);
     }
 
     class PlayMp3 extends AsyncTask<String, Void, String>{

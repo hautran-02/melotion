@@ -14,8 +14,8 @@
     <dimen name="stroke">0.8dp</dimen>
 
     <dimen name="radius">32dp</dimen>
-    <dimen name="appbar_height"></dimen>
-    <dimen name="btn_height">56dp</dimen>
+    <dimen name="appbar_height">56dp</dimen>
+    <dimen name="btn_height">48dp</dimen>
     <dimen name="ic_size">24dp</dimen>
     <dimen name="ic_size_viewport">24</dimen>
     <dimen name="btn_stroke">2dp</dimen>
