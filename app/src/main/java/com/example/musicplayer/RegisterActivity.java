@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
         btnRegister = findViewById(R.id.btnRegister);
         edFirstName = findViewById(R.id.edFirstName);
-        edLastName = findViewById(R.id.edLastName);
+        edLastName = findViewById(R.id.edLastname);
         edPhone = findViewById(R.id.edPhone);
         edEmail = findViewById(R.id.edEmail);
         edPassword = findViewById(R.id.edPassword);

@@ -3,52 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:backgroundTint="@color/transparent">
+    style="@style/bg_primary">
 
-    <ImageView
-        android:id="@+id/imgSong"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/default_song" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/pd_2"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvSongName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/imgSong"
-        android:text="Song title"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/imgSong"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_song" />
 
-    <TextView
-        android:id="@+id/tvArtist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvSongName"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/imgSong"
-        android:text="Artist name"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="80"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/pd_2"
+            android:paddingRight="@dimen/pd_2"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/playIcon"
-        android:layout_width="105dp"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="230dp"
-        android:layout_marginTop="35dp"
-        android:layout_toRightOf="@id/imgSong"
-        android:src="@drawable/ic_play" />
+            <TextView
+                android:id="@+id/tvSongName"
+                style="@style/text_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Song title" />
+
+            <TextView
+                android:id="@+id/tvSinger"
+                style="@style/h3"
+                android:layout_marginTop="@dimen/mg_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artist name"
+                android:textColor="@color/text"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/playIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_play" />
+    </LinearLayout>
+
 </soup.neumorphism.NeumorphCardView>

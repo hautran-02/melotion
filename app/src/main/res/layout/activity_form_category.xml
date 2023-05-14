@@ -73,9 +73,9 @@
                         android:layout_width="wrap_content">
 
                         <ImageButton
-                            android:id="@+id/btnFavorite"
+                            android:id="@+id/btnChooseImage"
                             style="@style/header_btn_inner"
-                            android:src="@drawable/ic_favorite_white" />
+                            android:src="@drawable/ic_upload" />
                     </soup.neumorphism.NeumorphCardView>
 
                 </LinearLayout>

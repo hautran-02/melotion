@@ -26,6 +26,7 @@
     <string name="upload">Tải lên</string>
     <string name="add">Thêm vào</string>
     <string name="cancel">Hủy bỏ</string>
+    <string name="login">Đăng nhập</string>
     <string name="logout">Đăng xuất</string>
     <string name="delete">Xóa</string>
     <string name="edit">Chỉnh sửa</string>
@@ -42,6 +43,9 @@
     <string name="last_name">Họ</string>
     <string name="email">Email</string>
     <string name="password">Mật khẩu</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="forward_register">Đăng ký tài khoản mới</string>
+    <string name="register">Đăng ký</string>
     <string name="category_list">Danh sách danh mục</string>
     <string name="list">Danh sách</string>
     <string name="edit_category">Chỉnh sửa danh mục</string>

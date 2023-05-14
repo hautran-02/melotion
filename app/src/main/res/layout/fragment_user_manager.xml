@@ -3,55 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="770dp"
+    android:layout_height="match_parent"
     android:background="@color/bg_layout"
     android:orientation="vertical">
 
     <!-- Note: A RecyclerView can also be used -->
-    <soup.neumorphism.NeumorphCardView
+
+    <LinearLayout
+        android:id="@+id/layout_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/btn_height"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_row">
 
-        <LinearLayout
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="16dp"
-            android:background="@color/bg_layout"
-            android:orientation="horizontal">
+        <TextView
+            style="@style/table"
+            android:layout_weight="0.16"
+            android:scrollHorizontally="true"
+            android:text="@string/number" />
 
-            <TextView
-                android:id="@+id/tvNumber"
-                style="@style/table"
-                android:layout_weight="0.16"
-                android:text="@string/number" />
 
-            <TextView
-                android:id="@+id/tvFirstName"
-                style="@style/table"
-                android:layout_weight="0.21"
-                android:text="@string/first_name" />
+        <TextView
+            style="@style/table"
+            android:layout_weight="0.21"
+            android:scrollHorizontally="true"
+            android:text="@string/first_name" />
 
-            <TextView
-                android:id="@+id/tvLastName"
-                style="@style/table"
-                android:layout_weight="0.21"
-                android:text="@string/last_name" />
+        <TextView
+            style="@style/table"
+            android:layout_weight="0.21"
+            android:scrollHorizontally="true"
+            android:text="@string/last_name" />
 
-            <TextView
-                android:id="@+id/tvEmail"
-                style="@style/table"
-                android:layout_weight="0.21"
-                android:text="@string/email" />
+        <TextView
+            style="@style/table"
+            android:layout_weight="0.21"
+            android:scrollHorizontally="true"
+            android:text="@string/email" />
 
-            <TextView
-                android:id="@+id/tvPhone"
-                style="@style/table"
-                android:layout_weight="0.21"
-                android:text="@string/phone" />
-        </LinearLayout>
-    </soup.neumorphism.NeumorphCardView>
+        <TextView
+            style="@style/table"
+            android:layout_weight="0.21"
+            android:scrollHorizontally="true"
+            android:text="@string/phone" />
+
+        <TextView
+            android:id="@+id/tvPassword"
+            style="@style/table"
+            android:layout_weight="0"
+            android:text="@string/password" />
+
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -63,9 +65,7 @@
         <!-- Scrollable content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvUserListManager"

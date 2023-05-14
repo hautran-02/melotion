@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_layout">
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +13,8 @@
 
         <LinearLayout
             style="@style/layout_header"
-            android:layout_marginTop="0dp">
+            android:layout_marginTop="0dp"
+            android:layout_height="@dimen/bar_height">
 
             <soup.neumorphism.NeumorphCardView
                 style="@style/header_btn">
@@ -22,6 +22,7 @@
                 <ImageButton
                     android:id="@+id/btnBack"
                     style="@style/header_btn_inner"
+                    android:src="@drawable/ic_back"
                     />
             </soup.neumorphism.NeumorphCardView>
 
@@ -31,6 +32,8 @@
                 <TextView
                     android:id="@+id/tvTitleAdmin"
                     style="@style/h3_2"
+                    android:paddingLeft="@dimen/pd_2"
+                    android:paddingRight="@dimen/pd_2"
                     android:textAlignment="center"
                     android:text="@string/page_title"
                     app:layout_constraintStart_toEndOf="@+id/imageButton"
@@ -50,12 +53,28 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <FrameLayout
-        android:id="@+id/container_admin"
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/body"
+        style="@style/bg_primary_pressed"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_height="603dp"
+        android:layout_marginTop="72dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <FrameLayout
+            android:id="@+id/container_admin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:paddingTop="@dimen/pd_2"
+            android:paddingBottom="@dimen/pd_2"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </soup.neumorphism.NeumorphCardView>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
