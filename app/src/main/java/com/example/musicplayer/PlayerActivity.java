@@ -209,26 +209,32 @@ public class PlayerActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view -> finish());
 
         btnShuffle.setOnClickListener(view -> onShuffle());
-        btnShuffle.setOnClickListener(view -> onRepeat());
+        btnRepeat.setOnClickListener(view -> onRepeat());
 
     }
 
     private void onShuffle() {
         if(!isShuffle){
+            btnShuffle.setImageResource(R.drawable.ic_shuffle);
+            btnRepeat.setImageResource(R.drawable.ic_not_repeat);
             isShuffle = true;
             isRepeat = false;
         }
         else {
+            btnShuffle.setImageResource(R.drawable.ic_not_shuffle);
             isShuffle = false;
         }
     }
 
     private void onRepeat() {
         if(!isRepeat){
+            btnRepeat.setImageResource(R.drawable.ic_repeat);
+            btnShuffle.setImageResource(R.drawable.ic_not_shuffle);
             isRepeat = true;
             isShuffle = false;
         }
         else {
+            btnRepeat.setImageResource(R.drawable.ic_not_repeat);
             isRepeat = false;
         }
     }
@@ -253,6 +259,9 @@ public class PlayerActivity extends AppCompatActivity {
         Utility.setScrollText(tvSongNamePlayer);
         Utility.setScrollText(tvTime);
         Utility.setScrollText(tvTotalTime);
+
+        btnRepeat.setImageResource(R.drawable.ic_not_repeat);
+        btnShuffle.setImageResource(R.drawable.ic_not_shuffle);
 
         isShuffle = false;
         isRepeat = false;
@@ -288,6 +297,11 @@ public class PlayerActivity extends AppCompatActivity {
                         mediaPlayer.start();
                     } else if (isShuffle) {
                         playNextSong(songs);
+                    }
+                    else {
+                        mediaPlayer.pause();
+                        objectAnimator.pause();
+                        imgPlay.setImageResource(R.drawable.ic_play);
                     }
                 }
             });

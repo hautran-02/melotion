@@ -72,7 +72,9 @@ public class EditUserActivity extends AppCompatActivity {
                         edEmail.getText().toString().isEmpty() ||edPassword.getText().toString().isEmpty() )
                 {
                     Toast.makeText(EditUserActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                }else {
+                }else if (edPassword.getText().toString().trim().length()<4) {
+                    Toast.makeText(EditUserActivity.this, "Mật khẩu ít nhất phải gồm 4 kí tự", Toast.LENGTH_SHORT).show();
+                } else {
                     submit();
                 }
             }
@@ -99,6 +101,7 @@ public class EditUserActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Toast.makeText(EditUserActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
