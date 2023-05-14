@@ -18,6 +18,7 @@ import com.example.musicplayer.RealPathUtil.RealPathUtil;
 import com.example.musicplayer.api.CategoryApi;
 import com.example.musicplayer.api.SongApi;
 import com.example.musicplayer.api.UserApi;
+import com.example.musicplayer.asset.LoadingDialog;
 import com.example.musicplayer.domain.Category;
 import com.example.musicplayer.domain.CategoryMessage;
 import com.example.musicplayer.retrofit.RetrofitClient;
@@ -102,7 +103,7 @@ public class CategoryFormActivity extends AppCompatActivity {
     }
 
     private void init(){
-        btnChooseImg = findViewById(R.id.btnChooseImage);
+        btnChooseImg = findViewById(R.id.btnUpSongImg);
         btnSubmit = findViewById(R.id.btnCategorySubmit);
         btnCancel = findViewById(R.id.btnCategoryCancel);
         edName = findViewById(R.id.edCategoryName);
@@ -170,18 +171,21 @@ public class CategoryFormActivity extends AppCompatActivity {
         RequestBody requestDescription = RequestBody.create(MediaType.parse("text/plain"), description);
 
         categoryApi = RetrofitClient.getRetrofit().create(CategoryApi.class);
+        LoadingDialog loadingDialog = new LoadingDialog(this);
+        loadingDialog.show();
         categoryApi.createCategory(requestName, image, requestDescription).enqueue(new Callback<CategoryMessage>() {
             @Override
             public void onResponse(Call<CategoryMessage> call, Response<CategoryMessage> response) {
                 CategoryMessage categoryMessage = response.body();
                 Toast.makeText(CategoryFormActivity.this, categoryMessage.getMessage(), Toast.LENGTH_SHORT).show();
-                onResume();
-                init();
+                loadingDialog.cancel();
+                finish();
             }
 
             @Override
             public void onFailure(Call<CategoryMessage> call, Throwable t) {
-
+                loadingDialog.cancel();
+                finish();
             }
         });
 
