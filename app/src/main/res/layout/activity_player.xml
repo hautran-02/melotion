@@ -58,21 +58,20 @@
 
             <soup.neumorphism.NeumorphCardView
                 style="@style/bg_primary"
-                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgDisc"
                     android:layout_width="match_parent"
-                    android:layout_height="310dp"
+                    android:layout_height="320dp"
+                    android:foreground="@drawable/circle_small"
+                    android:foregroundGravity="center"
                     android:padding="16dp"
                     android:src="@drawable/rangkhon"
                     app:civ_border_color="#595959"
                     app:civ_border_overlay="true"
-                    app:civ_border_width="50dp"
-                    android:foreground="@drawable/circle_small"
-                    android:foregroundGravity="center" />
+                    app:civ_border_width="50dp" />
             </soup.neumorphism.NeumorphCardView>
 
             <LinearLayout
@@ -89,6 +88,7 @@
                     android:paddingRight="@dimen/pd_2">
 
                     <TextView
+                        android:id="@+id/tvSongName"
                         style="@style/h2_2"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -96,6 +96,7 @@
                         android:text="@string/song_name"/>
 
                     <TextView
+                        android:id="@+id/tvSongSinger"
                         style="@style/h3_2"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -105,15 +106,13 @@
 
 
                 <soup.neumorphism.NeumorphCardView
-                    style="@style/bg_primary_cicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end">
+                    style="@style/bg_primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/favorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageButton
+                        android:id="@+id/btnFavorite"
+                        style="@style/header_btn_inner"
                         android:src="@drawable/ic_favorite_white" />
                 </soup.neumorphism.NeumorphCardView>
             </LinearLayout>
@@ -179,10 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/pd_2"
-                android:paddingRight="@dimen/pd_2">
-
+                android:orientation="horizontal">
                 <soup.neumorphism.NeumorphCardView
                     style="@style/bg_primary_cicle"
                     android:layout_width="wrap_content"
@@ -194,50 +190,55 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/player_btn"
                         android:src="@drawable/ic_previous" />
-
+                    <ImageButton
+                        android:id="@+id/btnSuffle"
+                        style="@style/header_btn_inner"
+                        android:src="@drawable/ic_shuffle" />
                 </soup.neumorphism.NeumorphCardView>
 
 
                 <soup.neumorphism.NeumorphCardView
-                    style="@style/bg_primary_cicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    style="@style/bg_primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgPre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/player_btn"
+                    <ImageButton
+                        android:id="@+id/btnPre"
+                        style="@style/header_btn_inner"
                         android:src="@drawable/ic_previous" />
-
                 </soup.neumorphism.NeumorphCardView>
 
                 <soup.neumorphism.NeumorphCardView
-                    style="@style/bg_primary_cicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    style="@style/bg_primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgPlay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/player_btn"
+                    <ImageButton
+                        android:id="@+id/btnPlay"
+                        style="@style/header_btn_inner"
                         android:src="@drawable/ic_play" />
-
                 </soup.neumorphism.NeumorphCardView>
 
                 <soup.neumorphism.NeumorphCardView
-                    style="@style/bg_primary_cicle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    style="@style/bg_primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgNext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/player_btn"
+                    <ImageButton
+                        android:id="@+id/btnNext"
+                        style="@style/header_btn_inner"
                         android:src="@drawable/ic_next" />
+                </soup.neumorphism.NeumorphCardView>
 
+                <soup.neumorphism.NeumorphCardView
+                    style="@style/bg_primary"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/btnRepeat"
+                        style="@style/header_btn_inner"
+                        android:src="@drawable/ic_repeat" />
                 </soup.neumorphism.NeumorphCardView>
 
             </LinearLayout>
