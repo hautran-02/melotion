@@ -59,4 +59,9 @@
     <string name="profile_phone">SĐT người dùng</string>
     <string name="profile_email">Email người dùng</string>
 
+    <string name="setting">Cài đặt</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="language_vietname">Tiếng Việt</string>
+    <string name="language_english">Tiếng Anh</string>
+
 </resources>
