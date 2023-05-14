@@ -70,7 +70,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Gần đây" />
-
+                <soup.neumorphism.NeumorphCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    style="@style/bg_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/lastestCategoryRecyclerView"
                     android:layout_width="match_parent"
@@ -78,6 +82,7 @@
                     android:layout_marginTop="10dp"
                     android:scrollbars="vertical"
                     tools:layout_editor_absoluteX="20dp" />
+                </soup.neumorphism.NeumorphCardView>
             </LinearLayout>
 
             <LinearLayout

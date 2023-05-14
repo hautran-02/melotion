@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+
                 // Replace the current fragment with a new fragment
                 Fragment songListFragment = new SongListFragment();
-
                 transaction.replace(R.id.container, songListFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -105,39 +105,41 @@ public class HomeFragment extends Fragment {
         lastestCategoryRecyclerView = view.findViewById(R.id.lastestCategoryRecyclerView);
         lastestCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
-        songApi.GetById(recentList).enqueue(new Callback<SongMessage>() {
-            @Override
-            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
-                List<Song> songs;
-                if(response.body().getMessage().equals("Successfully")) {
-                    SongMessage songMessage = response.body();
-                    songs = songMessage.getSongs();
+        if(!recentList.isEmpty()) {
+            songApi.GetById(recentList).enqueue(new Callback<SongMessage>() {
+                @Override
+                public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                    List<Song> songs;
+                    if (response.body().getMessage().equals("Successfully")) {
+                        SongMessage songMessage = response.body();
+                        songs = songMessage.getSongs();
 
-                    mSongAdapter = new SongListAdapter(songs);
-                    lastestCategoryRecyclerView.setAdapter(mSongAdapter);
-                    lastestCategoryRecyclerView.setHasFixedSize(true);
-                    mSongAdapter.notifyDataSetChanged();
-                    if (songs != null && !songs.isEmpty()) {
-                        mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Song data = songs.get(position);
-                                Intent intent = new Intent(getActivity(), PlayerActivity.class);
-                                intent.putExtra("position", position);
-                                intent.putExtra("songs", (Serializable) songs);
-                                startActivity(intent);
-                            }
-                        });
+                        mSongAdapter = new SongListAdapter(songs);
+                        lastestCategoryRecyclerView.setAdapter(mSongAdapter);
+                        lastestCategoryRecyclerView.setHasFixedSize(true);
+                        mSongAdapter.notifyDataSetChanged();
+                        if (songs != null && !songs.isEmpty()) {
+                            mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Song data = songs.get(position);
+                                    Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                                    intent.putExtra("position", position);
+                                    intent.putExtra("songs", (Serializable) songs);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
                     }
+
                 }
 
-            }
-            @Override
-            public void onFailure(Call<SongMessage> call, Throwable t) {
+                @Override
+                public void onFailure(Call<SongMessage> call, Throwable t) {
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
     private void GetCategory() {
@@ -169,6 +171,7 @@ public class HomeFragment extends Fragment {
                         // Replace the current fragment with a new fragment
                         Fragment songListFragment = new SongListFragment();
                         Bundle args = new Bundle();
+                        args.putString("title", data.getName());
                         args.putSerializable("category", data.getId());
                         songListFragment.setArguments(args);
 
