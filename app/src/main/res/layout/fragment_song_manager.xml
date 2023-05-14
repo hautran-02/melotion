@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="770dp"
     android:background="@color/bg_layout"
     android:orientation="vertical">
 
     <!-- Note: A RecyclerView can also be used -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="565dp"
+        android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
         android:paddingTop="56dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -21,10 +21,6 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Fragment song manager"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvSongListManager"
