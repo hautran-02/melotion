@@ -47,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
                                         .replace(R.id.container, new SearchFragment())
                                         .commit();
                                 return true;
-                            case R.id.navigation_setting:
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.container, new SettingFragment())
-                                        .commit();
-                                return true;
                             case R.id.navigation_user:
                                 getSupportFragmentManager().beginTransaction()
                                         .replace(R.id.container, new UserFragment())
