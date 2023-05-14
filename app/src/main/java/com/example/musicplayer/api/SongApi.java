@@ -3,6 +3,8 @@ package com.example.musicplayer.api;
 import com.example.musicplayer.domain.SongMessage;
 import com.example.musicplayer.domain.SongUpdate;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -25,8 +27,12 @@ public interface SongApi {
     Call<SongMessage> getAllSong();
 
     @FormUrlEncoded
-    @POST("song/GetId")
-    Call<SongMessage> GetById(@Field("id") Long id);
+    @POST("song/GetListId")
+    Call<SongMessage> GetById(@Field("ids") List<Long> ids);
+
+    @FormUrlEncoded
+    @POST("song/GetByName")
+    Call<SongMessage> GetByName(@Field("name") String name);
 
 
     @FormUrlEncoded

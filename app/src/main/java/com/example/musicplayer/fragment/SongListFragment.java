@@ -53,7 +53,7 @@ public class SongListFragment extends Fragment {
 
     static boolean isCategory;
 
-    private  Long categoryId;
+    private Long categoryId;
 
     public SongListFragment() {
         // Required empty public constructor

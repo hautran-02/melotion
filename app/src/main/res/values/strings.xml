@@ -32,6 +32,7 @@
     <string name="action">Hành động</string>
     <string name="edit_song">Chỉnh sửa bài hát</string>
     <string name="user_list">Danh sách người dùng</string>
+    <string name="user">Thông tin cá nhân</string>
     <string name="number">STT</string>
     <string name="full_name">Họ và tên</string>
     <string name="phone">Số điện thoại</string>

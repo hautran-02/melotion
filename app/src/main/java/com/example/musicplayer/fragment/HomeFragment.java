@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.PlayerActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.SQLite.DatabaseHelper;
 import com.example.musicplayer.SharedPrefManager;
 import com.example.musicplayer.SongFormActivity;
 import com.example.musicplayer.adapter.CategoryAdapter;
@@ -36,6 +37,7 @@ import com.example.musicplayer.retrofit.RetrofitClient;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,10 +45,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-    private RecyclerView categoryList;
+    private RecyclerView categoryList, lastestCategoryRecyclerView;
+
+    private SongListAdapter mSongAdapter;
     CategoryApi categoryApi;
 
+    List<Song> songRecents;
+
     FavouriteApi favouriteApi;
+
+    SongApi songApi;
 
     View view;
 
@@ -68,6 +76,7 @@ public class HomeFragment extends Fragment {
 
         GetCategory();
         getSongByFavourite();
+        getRecent();
         event();
         return view ;
     }
@@ -85,6 +94,51 @@ public class HomeFragment extends Fragment {
                 transaction.replace(R.id.container, songListFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+
+    }
+    private void getRecent(){
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        List<Long> recentList= dbHelper.getAllData();
+        Collections.reverse(recentList);
+        lastestCategoryRecyclerView = view.findViewById(R.id.lastestCategoryRecyclerView);
+        lastestCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
+        songApi.GetById(recentList).enqueue(new Callback<SongMessage>() {
+            @Override
+            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                List<Song> songs;
+                System.out.println(response.errorBody());
+                if(response.body().getMessage()!= null) {
+                    if (response.body().getMessage().equals("Successfully")) {
+
+                        SongMessage songMessage = response.body();
+                        songs = songMessage.getSongs();
+
+                        mSongAdapter = new SongListAdapter(songs);
+                        lastestCategoryRecyclerView.setAdapter(mSongAdapter);
+                        lastestCategoryRecyclerView.setHasFixedSize(true);
+                        mSongAdapter.notifyDataSetChanged();
+                        if (songs != null && !songs.isEmpty()) {
+                            mSongAdapter.setOnItemClickListener(new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Song data = songs.get(position);
+                                    Intent intent = new Intent(getActivity(), PlayerActivity.class);
+                                    intent.putExtra("position", position);
+                                    intent.putExtra("songs", (Serializable) songs);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    }
+                }
+
+            }
+            @Override
+            public void onFailure(Call<SongMessage> call, Throwable t) {
+
             }
         });
 

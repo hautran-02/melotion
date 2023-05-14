@@ -68,7 +68,13 @@ public class EditUserActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submit();
+                if(edFirstName.getText().toString().isEmpty() || ed_lastname.getText().toString().isEmpty() ||
+                        edEmail.getText().toString().isEmpty() ||edPassword.getText().toString().isEmpty() )
+                {
+                    Toast.makeText(EditUserActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    submit();
+                }
             }
         });
 
@@ -92,7 +98,7 @@ public class EditUserActivity extends AppCompatActivity {
         userApi.update(id, userUpdate).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(getApplicationContext(), "Thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditUserActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -100,7 +106,5 @@ public class EditUserActivity extends AppCompatActivity {
 
             }
         });
-        setEvent();
-        loadData();
     }
 }

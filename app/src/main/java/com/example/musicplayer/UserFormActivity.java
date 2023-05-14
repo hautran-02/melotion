@@ -32,7 +32,15 @@ public class UserFormActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submit();
+
+                if(edFirstName.getText().toString().isEmpty() || edLastName.getText().toString().isEmpty() ||
+                        edEmail.getText().toString().isEmpty() ||edPassword.getText().toString().isEmpty() ||
+                        edPhone.getText().toString().isEmpty())
+                {
+                    Toast.makeText(UserFormActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    submit();
+                }
             }
         });
 

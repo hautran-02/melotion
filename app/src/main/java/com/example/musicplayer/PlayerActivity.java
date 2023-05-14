@@ -20,6 +20,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import com.example.musicplayer.SQLite.DatabaseHelper;
 import com.example.musicplayer.adapter.SongAdapter;
 import com.example.musicplayer.api.FavouriteApi;
 import com.example.musicplayer.api.SongApi;
@@ -41,7 +43,7 @@ import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity {
 
-    TextView tvSongNamePlayer, tvTotalTime, tvTime;
+    TextView tvSongNamePlayer, tvTotalTime, tvTime,tvSongSinger, tvHeaderTitle;
     CircleImageView imgDisc;
     SeekBar seekBar;
     ImageView imgPre, imgPlay, imgNext, favorite, btnShuffle, btnRepeat, btnBack;
@@ -155,7 +157,6 @@ public class PlayerActivity extends AppCompatActivity {
             });
         }
         else {
-            System.out.println("11111111------------");
             favouriteApi.deleteFavorite(song.getId(),user.getId()).enqueue(new Callback<FavouriteMessage>() {
                 @Override
                 public void onResponse(Call<FavouriteMessage> call, Response<FavouriteMessage> response) {
@@ -184,11 +185,19 @@ public class PlayerActivity extends AppCompatActivity {
         objectAnimator.setInterpolator(new LinearInterpolator());
         objectAnimator.start();
     }
-
     private void playMusic(Song song){
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        dbHelper.addData(song.getId());
+        List<Long> longs= dbHelper.getAllData();
+        System.out.println("-----------");
+        for(Long t:longs) {
+            System.out.println(t);
+        }
         favourite = false;
         setFavourite(song);
-        tvSongNamePlayer.setText(song.getName()+"("+song.getSinger()+"-"+song.getAuthor()+")");
+        tvSongNamePlayer.setText(song.getName());
+        tvSongSinger.setText(song.getAuthor());
+        tvHeaderTitle.setText(song.getCategory().getName());
         imgPlay.setImageResource(R.drawable.ic_pause);
         tvSongNamePlayer.setSelected(true);
         Picasso.get().load(song.getImage()).into(imgDisc);
@@ -213,6 +222,9 @@ public class PlayerActivity extends AppCompatActivity {
         favorite = findViewById(R.id.btnFavorite);
         btnShuffle = findViewById(R.id.btnSuffle);
         btnRepeat = findViewById(R.id.btnRepeat);
+        btnBack = findViewById(R.id.btnBack);
+        tvSongSinger = findViewById(R.id.tvSongSinger);
+        tvHeaderTitle = findViewById(R.id.tvHeaderTitle);
     }
 
     class PlayMp3 extends AsyncTask<String, Void, String>{
