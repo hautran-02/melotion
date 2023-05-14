@@ -20,6 +20,7 @@ import com.example.musicplayer.RealPathUtil.RealPathUtil;
 import com.example.musicplayer.adapter.CategorySpinnerAdapter;
 import com.example.musicplayer.api.CategoryApi;
 import com.example.musicplayer.api.SongApi;
+import com.example.musicplayer.asset.LoadingDialog;
 import com.example.musicplayer.domain.Category;
 import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
@@ -265,6 +266,7 @@ public class SongFormActivity extends AppCompatActivity {
     }
 
     private void add() {
+        System.out.println("------------11111");
         int position = spCategory.getSelectedItemPosition();
         // Tạo một đối tượng RequestBody từ tệp tin
         RequestBody requestFileImage=RequestBody.create(MediaType.parse("multipart/form-data"), fileImage);
@@ -288,15 +290,23 @@ public class SongFormActivity extends AppCompatActivity {
         RequestBody requestIdCategory = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(id));
 
         songApi = RetrofitClient.getRetrofit().create(SongApi.class);
-        songApi.createSong(mp3, image, requestSongName, requestAuthor, requestSinger, requestIdCategory).enqueue(new Callback<String>() {
+        LoadingDialog loadingDialog = new LoadingDialog(this);
+        loadingDialog.show();
+
+        songApi.createSong(mp3, image, requestSongName, requestAuthor, requestSinger, requestIdCategory).enqueue(new Callback<SongMessage>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Toast.makeText(SongFormActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                SongMessage songMessage = response.body();
+                System.out.println(songMessage.getMessage());
+                Toast.makeText(SongFormActivity.this, songMessage.getMessage(), Toast.LENGTH_SHORT).show();
+                loadingDialog.cancel();
+                finish();
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
+            public void onFailure(Call<SongMessage> call, Throwable t) {
+                    loadingDialog.cancel();
+                    finish();
             }
         });
     }
