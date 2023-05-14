@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -45,6 +46,8 @@ public class SongListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private SongListAdapter mSongAdapter;
 
+    private TextView tvTitle;
+
     private SongApi songApi;
 
     private FavouriteApi favouriteApi;
@@ -54,6 +57,7 @@ public class SongListFragment extends Fragment {
     static boolean isCategory;
 
     private Long categoryId;
+    String title;
 
     public SongListFragment() {
         // Required empty public constructor
@@ -71,9 +75,12 @@ public class SongListFragment extends Fragment {
     }
 
     private void init(){
+        tvTitle = view.findViewById(R.id.tvTitle);
         Bundle bundle = getArguments();
         if(bundle != null){
             categoryId = bundle.getLong("category");
+            title = bundle.getString("title");
+            tvTitle.setText(title);
             if(categoryId != null) {
                 isCategory = true;
             }

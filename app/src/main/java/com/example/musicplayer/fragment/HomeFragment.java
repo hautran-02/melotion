@@ -88,9 +88,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+
                 // Replace the current fragment with a new fragment
                 Fragment songListFragment = new SongListFragment();
-
                 transaction.replace(R.id.container, songListFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
@@ -105,14 +105,12 @@ public class HomeFragment extends Fragment {
         lastestCategoryRecyclerView = view.findViewById(R.id.lastestCategoryRecyclerView);
         lastestCategoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         songApi = RetrofitClient.getInstance().getRetrofit().create(SongApi.class);
-        songApi.GetById(recentList).enqueue(new Callback<SongMessage>() {
-            @Override
-            public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
-                List<Song> songs;
-                System.out.println(response.errorBody());
-                if(response.body().getMessage()!= null) {
+        if(!recentList.isEmpty()) {
+            songApi.GetById(recentList).enqueue(new Callback<SongMessage>() {
+                @Override
+                public void onResponse(Call<SongMessage> call, Response<SongMessage> response) {
+                    List<Song> songs;
                     if (response.body().getMessage().equals("Successfully")) {
-
                         SongMessage songMessage = response.body();
                         songs = songMessage.getSongs();
 
@@ -133,15 +131,15 @@ public class HomeFragment extends Fragment {
                             });
                         }
                     }
+
                 }
 
-            }
-            @Override
-            public void onFailure(Call<SongMessage> call, Throwable t) {
+                @Override
+                public void onFailure(Call<SongMessage> call, Throwable t) {
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
     private void GetCategory() {
@@ -173,6 +171,7 @@ public class HomeFragment extends Fragment {
                         // Replace the current fragment with a new fragment
                         Fragment songListFragment = new SongListFragment();
                         Bundle args = new Bundle();
+                        args.putString("title", data.getName());
                         args.putSerializable("category", data.getId());
                         songListFragment.setArguments(args);
 
