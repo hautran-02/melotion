@@ -93,17 +93,20 @@ public class CategoryFormActivity extends AppCompatActivity {
             edName.setText(data.getName());
             edDescription.setText(data.getDescription());
             tvImg.setText(data.getImage());
+            btnSubmit.setText("Chỉnh sửa");
+
         } else {
             isEditForm = false;
             tvTitle.setText(getResources().getString(R.string.add_category));
             edName.setText("");
             edDescription.setText("");
             tvImg.setText(getResources().getString(R.string.choose_img));
+            btnSubmit.setText("Thêm vào");
         }
     }
 
     private void init(){
-        btnChooseImg = findViewById(R.id.btnUpSongImg);
+        btnChooseImg = findViewById(R.id.btnChooseImage);
         btnSubmit = findViewById(R.id.btnCategorySubmit);
         btnCancel = findViewById(R.id.btnCategoryCancel);
         edName = findViewById(R.id.edCategoryName);
@@ -204,10 +207,12 @@ public class CategoryFormActivity extends AppCompatActivity {
             public void onResponse(Call<CategoryMessage> call, Response<CategoryMessage> response) {
                 CategoryMessage categoryMessage = response.body();
                 Toast.makeText(getApplicationContext(), categoryMessage.getMessage(), Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
             public void onFailure(Call<CategoryMessage> call, Throwable t) {
+                finish();
             }
         });
         setEvent();

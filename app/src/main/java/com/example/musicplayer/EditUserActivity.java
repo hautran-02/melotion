@@ -19,6 +19,7 @@ import com.example.musicplayer.domain.Song;
 import com.example.musicplayer.domain.SongMessage;
 import com.example.musicplayer.domain.SongUpdate;
 import com.example.musicplayer.domain.User;
+import com.example.musicplayer.domain.UserMessage;
 import com.example.musicplayer.retrofit.RetrofitClient;
 
 import retrofit2.Call;
@@ -94,19 +95,21 @@ public class EditUserActivity extends AppCompatActivity {
         userUpdate.setLast_name(ed_lastname.getText().toString());
         userUpdate.setEmail(edEmail.getText().toString());
         userUpdate.setPassword(edPassword.getText().toString());
-
+        System.out.println(userUpdate.getPassword());
         Long id = userUpdate.getId();
 
-        userApi.update(id, userUpdate).enqueue(new Callback<User>() {
+        userApi.update(id, userUpdate).enqueue(new Callback<UserMessage>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Toast.makeText(EditUserActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<UserMessage> call, Response<UserMessage> response) {
+                UserMessage userMessage = response.body();
+                Toast.makeText(EditUserActivity.this, userMessage.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-
+            public void onFailure(Call<UserMessage> call, Throwable t) {
+                Toast.makeText(EditUserActivity.this, "Thành công", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
