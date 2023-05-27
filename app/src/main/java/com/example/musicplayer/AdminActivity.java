@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -146,13 +147,15 @@ public class AdminActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(currentFragment instanceof SongManagerFragment){
                     intent = new Intent(AdminActivity.this, SongFormActivity.class);
+                    startActivity(intent);
                 } else if (currentFragment instanceof CategoryManagerFragment) {
                     intent = new Intent(AdminActivity.this, CategoryFormActivity.class);
+                    startActivity(intent);
                 }
-//                else if (currentFragment instanceof UserManagerFragment) {
-//                    intent = new Intent(AdminActivity.this, UserFormActivity.class);
-//                }
-                startActivity(intent);
+                else if (currentFragment instanceof UserManagerFragment) {
+                    Toast.makeText(getApplicationContext(), "Không được thêm người dùng", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

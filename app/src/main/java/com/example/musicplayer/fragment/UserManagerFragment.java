@@ -70,19 +70,6 @@ public class UserManagerFragment extends Fragment  {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         userList = new ArrayList<>();
-        userList.add(new User(1, "0323124", "Hậu", "Trần", "hau06092002@gmail.com", "0323124"));
-        userList.add(new User(2, "0323124", "Hậu", "Trần", "hau06092002@gmail.com", "0323124"));
-        userList.add(new User(3, "0323124", "Hậu", "Trần", "hau06092002@gmail.com", "0323124"));
-        userList.add(new User(4, "0323124", "Hậu", "Trần", "hau06092002@gmail.com", "0323124"));
-        userAdapter = new UserAdapter(userList);
-        mRecyclerView.setAdapter(userAdapter);
-        userAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                User data = userList.get(position);
-                showDialog(data);
-            }
-        });
 
         userApi = RetrofitClient.getInstance().getRetrofit().create(UserApi.class);
         userApi.getAllUser().enqueue(new Callback<UserMessage>() {
